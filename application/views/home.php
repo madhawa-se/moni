@@ -211,11 +211,13 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="notifymode">Gender</label>
                                         <div class="col-md-9">
-                                            <select id="gender" name="gender" class="form-control" model="gender">
+                                            <select id="gender" name="gender" class="form-control" ng-model="gender"  ng-options="c.id as c.name  for c in genders track by c.id" required >
                                                 <option value="">--select--</option>
                                                 <option value="1">male</option>
                                                 <option value="2">female</option>
                                             </select>
+                                           <p ng-show="regform.gender.$invalid && !regform.gender.$pristine" class="label-danger help">please select your gender</p>
+
                                         </div>
                                     </div>
 
@@ -289,7 +291,7 @@
                                         <label class="col-md-3 control-label" for="textinput">Email</label>
                                         <div class="col-md-9">
                                             <input  name="email" model="email" type="text" placeholder="your email address" class="form-control input-md" required/>
-                                             <p ng-show="regform.email.$invalid && !regform.email.$pristine" class="label-danger help">You mail is required.</p>
+                                            <p ng-show="regform.email.$invalid && !regform.email.$pristine" class="label-danger help">You mail is required.</p>
 
                                         </div>
                                     </div>

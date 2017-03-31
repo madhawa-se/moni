@@ -8,6 +8,7 @@ app.controller('formController', function ($scope, $http) {
     $scope.formsubmitted = false;
     $scope.countryList={};
     $scope.religionList={};
+    $scope.genders=[{id:"1",name:"male"},{id:"2",name:"femail"}];
     $scope.submitForm = function (isValid) {
 
         if (isValid) {
