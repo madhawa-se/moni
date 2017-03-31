@@ -12,6 +12,7 @@ class Home extends CI_Controller {
         $this->load->library('email');
         $this->load->database();
         $this->load->model('user_model');
+        $this->load->model("reg_model");
     }
 
     function index() {
@@ -23,7 +24,8 @@ class Home extends CI_Controller {
         //$this->form_validation->set_rules('name', 'name', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('home');
+            $list=$this->reg_model->get_contry_list();
+            $this->load->view('home',array('countries'=>$list));
         } else {
             $random = substr(md5(rand()), 0, 7);
             $data = array(
