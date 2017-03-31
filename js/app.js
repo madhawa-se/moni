@@ -7,6 +7,7 @@ app.controller('formController', function ($scope, $http) {
     $scope.regex = 'm';
     $scope.formsubmitted = false;
     $scope.countryList={};
+    $scope.religionList={};
     $scope.submitForm = function (isValid) {
 
         if (isValid) {
@@ -23,7 +24,7 @@ app.controller('formController', function ($scope, $http) {
         var country = $('#livein :selected');
         var countryName = country.text();
         var countryId=country.val();
-        $scope.countrycode = ("+" + $scope.countryList[countryId].code);
+        $scope.countrycode = ("+" + $scope.countryList[countryId-1].code);
     };
 
     $scope.getCountryList = function () {
@@ -36,6 +37,17 @@ app.controller('formController', function ($scope, $http) {
             alert(response.statusText);
         });
     };
+    $scope.getReligionList = function () {
+        $http({
+            method: "GET",
+            url: "../Db_ajax/get_religion_list"
+        }).then(function mySucces(response) {
+            $scope.religionList = response.data;
+        }, function myError(response) {
+            alert(response.statusText);
+        });
+    };
     $scope.getCountryList();
+    $scope.getReligionList();
 
 });

@@ -262,12 +262,8 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="threshold">Religion</label>
                                         <div class="col-md-9">
-                                            <select id="religion" name="religion" class="form-control">
+                                            <select id="religion" name="religion"  ng-model="religion_list" class="form-control" ng-options="c.id as c.name  for c in religionList track by c.id">
                                                 <option value="">--select--</option>
-                                                <option value="1">Hindu</option>
-                                                <option value="2">Christian</option>
-                                                <option value="1">Muslim</option>
-                                                <option value="2">Buddism</option>
                                             </select>
                                         </div>
                                     </div>
@@ -292,7 +288,9 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textinput">Email</label>
                                         <div class="col-md-9">
-                                            <input id="email" name="email" type="email" placeholder="your email address" class="form-control input-md" required="">
+                                            <input  name="email" model="email" type="text" placeholder="your email address" class="form-control input-md" required/>
+                                             <p ng-show="regform.email.$invalid && !regform.email.$pristine" class="label-danger help">You mail is required.</p>
+
                                         </div>
                                     </div>
 
@@ -303,7 +301,7 @@
                                         <div class="col-md-9">
                                             <select id="livein" name="livein" class="form-control" ng-model="country_list" ng-change="updateCountry()"
                                                     ng-options="c.id as c.name  for c in countryList track by c.id" required>
-                                                
+
                                                 <option data-country_code="00" value="">--select--</option>
 
                                                 <!-- <option ng-repeat="country in countryList" data-country_code="{{country.code}}" value="{{country.id}}">{{country.name}}</option>-->

@@ -10,4 +10,8 @@ class Reg_model extends CI_Model{
         $list=$this->db->get("country")->result();
         return $list;
     }
+    function get_religion_list(){
+        $list=$this->db->get("religion")->result();
+        return $list;
+    }
 }
