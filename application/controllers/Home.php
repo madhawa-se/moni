@@ -20,12 +20,14 @@ class Home extends CI_Controller {
         $this->form_validation->set_rules('name', 'name', 'required');
         $this->form_validation->set_rules('email', 'email', 'required');
         $this->form_validation->set_rules('password', 'password', 'required');
+
+        $this->form_validation->set_error_delimiters('<p class="label-danger help">', '</p>');
         //$this->form_validation->set_rules('name', 'name', 'required');
         //$this->form_validation->set_rules('name', 'name', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $list=$this->reg_model->get_contry_list();
-            $this->load->view('home',array('countries'=>$list));
+            $list = $this->reg_model->get_contry_list();
+            $this->load->view('home', array('countries' => $list));
         } else {
             $random = substr(md5(rand()), 0, 7);
             $data = array(
