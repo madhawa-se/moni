@@ -335,7 +335,7 @@
 
 
                                         <div class="col-md-6">
-                                            <input id="fnumber" name="fnumber" type="text" placeholder="number" class="form-control input-md" required="">
+                                            <input id="fnumber" name="fnumber" type="number" placeholder="number" class="form-control input-md" required="">
                                         </div>
                                     </div>
 
@@ -344,7 +344,8 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textinput">Password</label>
                                         <div class="col-md-9">
-                                            <input id="password" name="password" type="password" placeholder="placeholder" class="form-control input-md" required="">
+                                            <input id="password" name="password" type="password" placeholder="placeholder" class="form-control input-md" required>
+                                            <p ng-show="regform.password.$invalid && (!regform.password.$pristine || submitted)" class="help-danger help">enter password</p>
                                         </div>
 
                                     </div>
@@ -819,8 +820,9 @@
                     <li><a href="#" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="#" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
+        </footer>
     </div>
-</footer>
+
 
 
 

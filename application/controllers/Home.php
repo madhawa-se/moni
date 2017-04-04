@@ -66,7 +66,7 @@ class Home extends CI_Controller {
 
     function login_submit() {
         $username = $this->input->post('user');
-        $password = $this->input->post('pass');
+        $password = md5($this->input->post('pass'));
         $status = $this->user_model->checkAuth($username, $password);
         if ($status == true) {
             $logindata = array(
@@ -90,7 +90,7 @@ class Home extends CI_Controller {
         $data = array(
             'name' => $this->input->post('name'),
             'email' => $this->input->post('email'),
-            'password' => $this->input->post('password'),
+            'password' => md5($this->input->post('password')),
             'rand' => $random,
             'activation' => '0',
             'religion' => $this->input->post('religion'),
