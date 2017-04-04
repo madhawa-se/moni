@@ -14,4 +14,8 @@ class Reg_model extends CI_Model{
         $list=$this->db->get("religion")->result();
         return $list;
     }
+    function get_Lan_list(){
+        $list=$this->db->get("lan")->result();
+        return $list;
+    }
 }

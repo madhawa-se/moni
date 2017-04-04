@@ -8,65 +8,109 @@ class Home extends CI_Controller {
         parent::__construct();
 
         $this->load->helper(array('form'));
-        $this->load->library('form_validation');
         $this->load->library('email');
         $this->load->database();
+        $this->load->library('session');
         $this->load->model('user_model');
         $this->load->model("reg_model");
     }
 
     function index() {
-
-        $this->form_validation->set_rules('name', 'name', 'required');
-        $this->form_validation->set_rules('email', 'email', 'required');
-        $this->form_validation->set_rules('password', 'password', 'required');
-
-        $this->form_validation->set_error_delimiters('<p class="label-danger help">', '</p>');
-        //$this->form_validation->set_rules('name', 'name', 'required');
-        //$this->form_validation->set_rules('name', 'name', 'required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $list = $this->reg_model->get_contry_list();
-            $this->load->view('home', array('countries' => $list));
-        } else {
-            $random = substr(md5(rand()), 0, 7);
-            $data = array(
-                'name' => $this->input->post('name'),
-                'email' => $this->input->post('email'),
-                'password' => $this->input->post('password'),
-                'rand' => $random,
-                'activation' => '0'
-            );
-
-            // insert form data into database
-            if ($this->user_model->insertUser($data)) {
-                $insert_id = $this->db->insert_id();
-                // send email
-                if ($this->user_model->sendEmail($this->input->post('email'), $insert_id, $random)) {
-                    echo 'email sent please check your email address';
-                }
-            } else {
-                echo 'form submit error';
-            }
-
-            //$this->load->view('formsuccess');
+        if($this->session->has_userdata('loggedin')){
+             $login_data=$this->session->userdata('loggedin');
+             $uname=$login_data["username"];
+             echo ("hello $uname ! welcome back");
+        }else{
+            $this->register();
         }
     }
 
-    function login() {
-        $this->form_validation->set_rules('user', 'user name', 'required');
-        $this->form_validation->set_rules('pass', 'password', 'required');
+    function register() {
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('home');
-        } else {
-            $username = $this->input->post('user');
-            $password = $this->input->post('pass');
-            $status = $this->user_model->checkAuth($username, $password);
-            if ($status == true) {
-                echo 'you are logged in';
+        $data = array();
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<p class="help-danger help">', '</p>');
+
+        if ($this->input->post('register')) {
+            $this->form_validation->set_rules('name', 'name', 'required');
+            $this->form_validation->set_rules('email', 'email', 'required|callback_email_check');
+            $this->form_validation->set_rules('password', 'password', 'required');
+
+            $this->form_validation->set_rules('profilefor', 'profile for', 'required');
+            $this->form_validation->set_rules('gender', 'gender', 'required');
+            $this->form_validation->set_rules('mothertongue', 'mother tongue', 'required');
+            $this->form_validation->set_rules('religion', 'religion', 'required');
+            $this->form_validation->set_rules('terms', 'terms', 'required');
+            $this->form_validation->set_rules('livein', 'livein', 'required');
+
+
+            if ($this->form_validation->run()) {
+                $this->reg_submit();
             } else {
-                echo 'login fail';
+                $data['reg_errors'] = validation_errors();
+            }
+        } else if ($this->input->post('login')) {
+            $this->form_validation->set_rules('user', 'user name', 'required');
+            $this->form_validation->set_rules('pass', 'password', 'required');
+
+
+            if ($this->form_validation->run()) {
+                $this->login_submit();
+            } else {
+                $data['login_errors'] = validation_errors();
+            }
+        }
+        $data['countries'] = $this->reg_model->get_contry_list();
+        $this->load->view('home', $data);
+    }
+
+    function login_submit() {
+        $username = $this->input->post('user');
+        $password = $this->input->post('pass');
+        $status = $this->user_model->checkAuth($username, $password);
+        if ($status == true) {
+            $logindata = array(
+                'username' => $username,
+                'logged_in' => TRUE
+            );
+            //$this->session->sess_expiration = '14400';
+            $this->session->set_userdata('loggedin', $logindata);
+            echo 'you are logged in';
+        } else {
+            echo 'login fail';
+        }
+    }
+
+    function reg_submit() {
+        $random = substr(md5(rand()), 0, 7);
+        $date = new DateTime();
+        $date->setDate($this->input->post('year'), $this->input->post('month'), $this->input->post('day'));
+        $date = $date->format('Y-m-d');
+        $today = date('Y-m-d');
+        $data = array(
+            'name' => $this->input->post('name'),
+            'email' => $this->input->post('email'),
+            'password' => $this->input->post('password'),
+            'rand' => $random,
+            'activation' => '0',
+            'religion' => $this->input->post('religion'),
+            'profilefor' => $this->input->post('profilefor'),
+            'lan' => $this->input->post('mothertongue'),
+            'country' => $this->input->post('livein'),
+            'birthday' => $date,
+            'reg_date' => $today,
+            'gender' => $this->input->post('gender')
+        );
+
+        // insert form data into database
+        $status = $this->user_model->insertUser($data);
+        if ($status === FALSE) {
+            echo 'form submit error';
+        } else {
+            $insert_id = $status;
+            // send email
+            if ($this->user_model->sendEmail($this->input->post('email'), $insert_id, $random)) {
+                echo 'email sent please check your email address';
             }
         }
     }
@@ -85,6 +129,15 @@ class Home extends CI_Controller {
             } else {
                 echo 'sorry!. account activation failed';
             }
+        }
+    }
+
+    public function email_check($str) {
+        if ($this->user_model->is_user_exist($str)) {
+            $this->form_validation->set_message('email_check', 'already a memmber try login');
+            return FALSE;
+        } else {
+            return TRUE;
         }
     }
 

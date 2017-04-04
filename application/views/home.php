@@ -13,7 +13,7 @@
 
         <!-- <link href="css/bootstrap.min.css" rel="stylesheet">-->
 
-        <link href="css/style.css" rel="stylesheet">
+        <link href="<?php echo base_url() ?>css/style.css" rel="stylesheet">
         <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> 
@@ -22,6 +22,20 @@
 
 
         <link rel="icon" href="favicon.jpg" type="image/gif" sizes="16x16">
+
+
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+
+
+        <script src="<?php echo base_url() ?>js/angular.js"></script>
+        <script>
+            var baseurl = "<?php echo base_url(); ?>";
+        </script>
+        <script src="<?php echo base_url() ?>js/app.js"></script>
     </head>
 
 
@@ -45,9 +59,9 @@
                     </div>
                     <div class="col-sm-6 hidden-xs">
                         <div class="row">
-                            <?php echo validation_errors(); ?>  
-                            <?php echo form_open('Home/login'); ?>  
-                            <form method="post">
+
+                            <form method="post" action="<?php echo site_url('home/register'); ?>">
+                                <?php if (isset($login_errors)) echo $login_errors; ?>
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Email Address" name="user">
@@ -83,7 +97,7 @@
 
                                 <div class="col-sm-2">
                                     <div class="form-group">
-                                        <input type="submit" value="login" class="button3">
+                                        <input type="submit" name="login" value="login" class="button3">
                                     </div>
                                 </div>
                             </form>
@@ -135,11 +149,11 @@
                         <style>
                             .img3{
                                 vertical-align: middle;
-                                margin-left: 100px;
+                                margin-left: 200px;
                             }
 
                         </style>
-                        <img class="img3" src="<?php echo base_url() ?>/srilanka2.png" align="center">
+                        <img class="img3" height="550px" src="<?php echo base_url() ?>images/map3.png" align="center">
 
                     </div>	
 
@@ -173,17 +187,17 @@
                             <h3 align="center"><b>  An Exclusive Matrimoney Portal for <br>SriLankans around the world</b> </h3>
                             <div class="well8">
 
-                                <?php echo validation_errors(); ?>  
-                                <form action="" novalidate="true"  class="form-horizontal" method="post" name="regform" ng-controller="formController" ng-submit="submitForm(true)">
 
+                                <form ng-cloak ng-validate="true" action="<?php echo site_url('home/register'); ?>" novalidate="true"  class="form-horizontal" method="post" name="regform" ng-controller="formController" ng-submit="submitForm($event, regform.$valid)">
 
+                                    <?php if (isset($reg_errors)) echo $reg_errors; ?>
 
                                     <legend><font color="#de3075" size="6px" >Register Free</font></legend>
 
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" >Profile for</label>
                                         <div class="col-md-9">
-                                            <select id="profile" name="profile for" class="form-control">
+                                            <select id="profile" name="profilefor" class="form-control">
                                                 <option value="">--select--</option>
                                                 <option value="1">my self</option>
                                                 <option value="2">friends</option>
@@ -201,7 +215,7 @@
                                         <label class="col-md-3 control-label" for="textinput" align="left">Name</label>
                                         <div class="col-md-9">
                                             <input id="name" ng-model="name" name="name" type="text" placeholder="your name" class="form-control input-md" required="">
-                                            <p ng-show="regform.name.$invalid && !regform.name.$pristine" class="label-danger help">You name is required.</p>
+                                            <p ng-show="regform.name.$invalid && (!regform.name.$pristine || submitted)" class="help-danger help">You name is required.</p>
                                         </div>
 
                                     </div>
@@ -216,7 +230,7 @@
                                                 <option value="1">male</option>
                                                 <option value="2">female</option>
                                             </select>
-                                           <p ng-show="regform.gender.$invalid && !regform.gender.$pristine" class="label-danger help">please select your gender</p>
+                                            <p ng-show="regform.gender.$invalid && (!regform.gender.$pristine || submitted)" class="help-danger help">please select your gender</p>
 
                                         </div>
                                     </div>
@@ -264,9 +278,10 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="threshold">Religion</label>
                                         <div class="col-md-9">
-                                            <select id="religion" name="religion"  ng-model="religion_list" class="form-control" ng-options="c.id as c.name  for c in religionList track by c.id">
+                                            <select id="religion" name="religion"  ng-model="religion_list" class="form-control" ng-options="c.id as c.name  for c in religionList track by c.id" required>
                                                 <option value="">--select--</option>
                                             </select>
+                                            <p ng-show="regform.religion.$invalid && (regform.religion.$touched || submitted)" class="help-danger help">select your religion</p>
                                         </div>
                                     </div>
 
@@ -275,13 +290,10 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="threshold">Mother Tongue</label>
                                         <div class="col-md-9">
-                                            <select id="mothertongue" name="mothertongue" class="form-control">
+                                            <select id="mothertongue" name="mothertongue" ng-model="lan_list" class="form-control" ng-options="c.id as c.name  for c in lanList track by c.id" required>
                                                 <option value="">--select--</option>
-                                                <option value="1">Sinhala</option>
-                                                <option value="2">Tamil</option>
-                                                <option value="1">English</option>
-                                                <option value="2">Others</option>
                                             </select>
+                                            <p ng-show="regform.mothertongue.$invalid && (regform.mothertongue.$touched || submitted)" class="help-danger help">select your language</p>
                                         </div>
                                     </div>
 
@@ -291,7 +303,7 @@
                                         <label class="col-md-3 control-label" for="textinput">Email</label>
                                         <div class="col-md-9">
                                             <input  name="email" model="email" type="text" placeholder="your email address" class="form-control input-md" required/>
-                                            <p ng-show="regform.email.$invalid && !regform.email.$pristine" class="label-danger help">You mail is required.</p>
+                                            <p ng-show="regform.email.$invalid && (!regform.email.$pristine || submitted)" class="help-danger help">You mail is required.</p>
 
                                         </div>
                                     </div>
@@ -309,7 +321,7 @@
                                                 <!-- <option ng-repeat="country in countryList" data-country_code="{{country.code}}" value="{{country.id}}">{{country.name}}</option>-->
 
                                             </select>
-                                            <p ng-show="regform.livein.$invalid && (regform.livein.$touched || regform.livein.$submitted)" class="label-danger help">country is required.</p>
+                                            <p ng-show="regform.livein.$invalid && (regform.livein.$touched || submitted)" class="help-danger help">country is required.</p>
                                         </div>
                                     </div>
 
@@ -340,7 +352,7 @@
 
                                     <div class="span3">
                                         <label><input type="checkbox" name="terms"> I agree with the <a href="#">Terms and Conditions</a>.</label>
-                                        <input type="submit" value="Sign up" class="button2">
+                                        <input name="register" type="submit" value="Sign up" class="button2" ng-click="submitted = true">
                                     </div>
                                 </form>
                             </div>
@@ -811,15 +823,7 @@
 </footer>
 
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
 
-
-<script src="<?php echo base_url() ?>js/angular.js"></script>
-
-<script src="<?php echo base_url() ?>js/app.js"></script>
 
 </body>
 </html>

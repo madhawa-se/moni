@@ -7,7 +7,18 @@ class user_model extends CI_Model {
     }
 
     function insertUser($data) {
-        return $this->db->insert('user', $data);
+        //return $this->db->insert('user', $data);
+        //var_dump($data);
+
+        $this->db->trans_start();
+        $this->db->insert('user', $data);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        if(!$this->db->trans_status()){
+            return false;
+        }else{
+            return $insert_id;
+        }
     }
 
     function sendEmail($to_email, $rand, $uid) {
@@ -43,7 +54,7 @@ class user_model extends CI_Model {
 
                 $this->db->set('activation', '1');
                 $this->db->where('id', $id);
-                $status=$this->db->update('user');
+                $status = $this->db->update('user');
                 return $status;
             } else {
                 return false;
@@ -55,23 +66,36 @@ class user_model extends CI_Model {
         //$this->db->where('md5(email)', $key);
         //return $this->db->update('user', $data);
     }
-    function checkAuth($username, $password){
+
+    function checkAuth($username, $password) {
         $this->db->from('user');
         $this->db->where('email', $username);
-        $this->db->where('password',$password);
+        $this->db->where('password', $password);
         $query = $this->db->get();
-        $ret=$query->num_rows();
-        if($ret>=1){
+        $ret = $query->num_rows();
+        if ($ret >= 1) {
             //echo 'in';
             $result = $query->row();
-            if($result->activation == 1){
+            if ($result->activation == 1) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
             return true;
-        }else{
+        } else {
             return false;
+        }
+    }
+    
+    function is_user_exist($email){
+        $this->db->from('user');
+        $this->db->where('email', $email);
+        $query = $this->db->get();
+        $ret = $query->num_rows();
+        if($ret==0){
+            return false;
+        }else{
+            return true;
         }
     }
 

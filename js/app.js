@@ -6,32 +6,27 @@ app.controller('formController', function ($scope, $http) {
     $scope.countrycode = "";
     $scope.regex = 'm';
     $scope.formsubmitted = false;
-    $scope.countryList={};
-    $scope.religionList={};
-    $scope.genders=[{id:"1",name:"male"},{id:"2",name:"femail"}];
-    $scope.submitForm = function (isValid) {
-
-        if (isValid) {
-            // alert('our form is amazing');
-            return true;
-        } else {
-            $scope.formsubmitted = true;
-            //alert(' form is invalid');
-            console.log($scope.regform.$error);
+    $scope.submitted = false;
+    $scope.countryList = {};
+    $scope.religionList = {};
+    $scope.genders = [{id: "1", name: "male"}, {id: "2", name: "femail"}];
+    $scope.submitForm = function ($event, $valid) {
+        //alert(isValid);
+        if (!$valid) {
+            $event.preventDefault();
         }
-
     };
     $scope.updateCountry = function () {
         var country = $('#livein :selected');
         var countryName = country.text();
-        var countryId=country.val();
-        $scope.countrycode = ("+" + $scope.countryList[countryId-1].code);
+        var countryId = country.val();
+        $scope.countrycode = ("+" + $scope.countryList[countryId - 1].code);
     };
 
     $scope.getCountryList = function () {
         $http({
             method: "GET",
-            url: "../Db_ajax/get_country_list"
+            url: baseurl + "Db_ajax/get_country_list"
         }).then(function mySucces(response) {
             $scope.countryList = response.data;
         }, function myError(response) {
@@ -41,14 +36,26 @@ app.controller('formController', function ($scope, $http) {
     $scope.getReligionList = function () {
         $http({
             method: "GET",
-            url: "../Db_ajax/get_religion_list"
+            url: baseurl + "Db_ajax/get_religion_list"
         }).then(function mySucces(response) {
             $scope.religionList = response.data;
         }, function myError(response) {
             alert(response.statusText);
         });
     };
+    $scope.getLanList = function () {
+        $http({
+            method: "GET",
+            url: baseurl + "Db_ajax/get_lan_list"
+        }).then(function mySucces(response) {
+            $scope.lanList = response.data;
+        }, function myError(response) {
+            alert(response.statusText);
+        });
+    };
+
     $scope.getCountryList();
     $scope.getReligionList();
+    $scope.getLanList();
 
 });
