@@ -113,6 +113,14 @@ class user_model extends CI_Model {
         return false;
     }
 
+    function get_user_data($email) {
+        $user_data = $this->get_user($email); //check null
+
+        $data = $user_data;
+        $json_data= json_encode($data);
+        return $json_data;
+    }
+
 }
 
 ?>

@@ -36,6 +36,13 @@
             var baseurl = "<?php echo base_url(); ?>";
         </script>
         <script src="<?php echo base_url() ?>js/app.js"></script>
+        <script>
+        <?php
+        if (isset($jsondata)) {
+            echo "var jsonData=$jsondata";
+        }
+        ?>
+        </script>
     </head>
 
 
@@ -295,7 +302,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <select name="day" class = "form-control">
+                                                    <select name="day" class = "form-control" ng-model="day">
                                                         <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
                                                         <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
                                                         <option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
@@ -348,7 +355,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label" for="textinput">Email</label>
                                                 <div class="col-md-9">
-                                                    <input  name="email" model="email" type="text" placeholder="your email address" class="form-control input-md" required/>
+                                                    <input  name="email" ng-model="email" type="text" placeholder="your email address" class="form-control input-md" required/>
                                                     <p ng-show="regform.email.$invalid && (!regform.email.$pristine || submitted)" class="help-danger help">You mail is required.</p>
 
                                                 </div>
@@ -359,7 +366,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label" for="threshold">Living In</label>
                                                 <div class="col-md-9">
-                                                    <select id="livein" name="livein" class="form-control" ng-model="country_list" ng-change="updateCountry()"
+                                                    <select id="livein" name="livein" class="form-control" ng-model="country_list" ng-change="updateCountry(country_list)"
                                                             ng-options="c.id as c.name  for c in countryList track by c.id" required>
 
                                                         <option data-country_code="00" value="">--select--</option>
@@ -376,12 +383,12 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label" for="textinput">Phone</label>
                                                 <div class="col-md-3">
-                                                    <input id="isd" name="countrycode" ng-model="countrycode" type="text" placeholder="code" class="form-control input-md" required="" readonly="true">
+                                                    <input id="isd" name="countrycode" ng-model="countrycode" type="text" placeholder="code" class="form-control input-md" required="" readonly="true" value="{{country_list}}">
                                                 </div>
 
 
                                                 <div class="col-md-6">
-                                                    <input id="fnumber" name="fnumber" type="number" placeholder="number" class="form-control input-md" required="">
+                                                    <input id="fnumber" name="fnumber" ng-model="fnumber" type="number" placeholder="number" class="form-control input-md" required="">
                                                 </div>
                                             </div>
 
@@ -406,7 +413,7 @@
                             </div>
                         </div>
                         <!-- form -->
-                        <?php } ?>
+                    <?php } ?>
 
                     <div class="well4">
                         <div class="container">

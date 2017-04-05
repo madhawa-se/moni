@@ -18,8 +18,11 @@ class Profile extends My_Controller {
     }
 
     public function edit() {
-        $this->view_data["menu"]="edit";
-         $this->base_profile();
+        $login_data = $this->session->userdata('loggedin');
+        $email = $login_data["username"];
+        $this->view_data["menu"] = "edit";
+        $this->view_data["jsondata"] = $this->user_model->get_user_data($email);
+        $this->base_profile();
     }
 
     function base_profile() {
