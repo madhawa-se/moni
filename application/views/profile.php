@@ -400,6 +400,22 @@ if (isset($jsondata)) {
                                         </form>
                                     </div>
                                 </div>
+                                <div class="col-sm-4">
+                                     <h3 align="center"><b>‫⁮</b>‫⁮.</h3>
+                                    <div class="well8">
+                                        <form>
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label" >Profile Image</label>
+                                                <div class="col-md-7">
+                                                    <div class="profile-img">
+                                                        <img class="img-responsive img-circle" style="max-width:100px" src="<?php echo base_url() ?>images/profile.png"/>
+                                                    </div>
+                                                </div>
+                                                <input type="file" value="upload"/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- form -->

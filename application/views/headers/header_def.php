@@ -28,7 +28,7 @@
                                 </div>	
                                 <div class="col-sm-5">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Password" name="pass">
+                                        <input type="password" class="form-control" placeholder="Password" name="pass">
                                         <div class="login-bottom-text hidden-sm"> Forgotten account?  </div>
                                     </div>
                                 </div>
