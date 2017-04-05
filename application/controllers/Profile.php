@@ -1,8 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Test extends My_Controller {
+class Profile extends My_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -15,8 +13,8 @@ class Test extends My_Controller {
         $this->load->model("reg_model");
     }
 
-    function index() {
-        $this->load->view('edit',$this->view_data);
+    public function index() {
+        $this->load->view('profile', $this->view_data);
     }
 
 }

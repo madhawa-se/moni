@@ -42,12 +42,6 @@
     <body>
 
 
-        <!--header starat-->
-
-        <?php echo $header?>
-
-        <!--header end-->
-
 
 
 

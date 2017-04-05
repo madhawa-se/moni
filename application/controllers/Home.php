@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home extends My_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -16,11 +16,12 @@ class Home extends CI_Controller {
     }
 
     function index() {
-        if($this->session->has_userdata('loggedin')){
-             $login_data=$this->session->userdata('loggedin');
-             $uname=$login_data["username"];
-             echo ("hello $uname ! welcome back");
-        }else{
+        if ($this->loggedin) {
+            $login_data = $this->session->userdata('loggedin');
+            $uname = $login_data["username"];
+            ///echo ("hello $uname ! welcome back");
+            $this->load->view('home', $this->view_data);
+        } else {
             $this->register();
         }
     }
@@ -47,7 +48,7 @@ class Home extends CI_Controller {
             if ($this->form_validation->run()) {
                 $this->reg_submit();
             } else {
-                $data['reg_errors'] = validation_errors();
+                $this->view_data['reg_errors'] = validation_errors();
             }
         } else if ($this->input->post('login')) {
             $this->form_validation->set_rules('user', 'user name', 'required');
@@ -57,11 +58,11 @@ class Home extends CI_Controller {
             if ($this->form_validation->run()) {
                 $this->login_submit();
             } else {
-                $data['login_errors'] = validation_errors();
+                $this->view_data['login_errors'] = validation_errors();
             }
         }
-        $data['countries'] = $this->reg_model->get_contry_list();
-        $this->load->view('home', $data);
+        $this->view_data['countries'] = $this->reg_model->get_contry_list();
+        $this->load->view('home', $this->view_data);
     }
 
     function login_submit() {
