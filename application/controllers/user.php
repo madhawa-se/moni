@@ -85,5 +85,9 @@ class User extends My_Controller {
             }
         }
     }
+      function logout(){
+        $this->session->unset_userdata('loggedin');
+        redirect("/home");
+    }
 
 }

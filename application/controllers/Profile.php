@@ -36,5 +36,57 @@ class Profile extends My_Controller {
         }
     }
 
+    function register() {
+
+        $data = array();
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<p class="help-danger help">', '</p>');
+
+
+        $this->form_validation->set_rules('name', 'name', 'required');
+        $this->form_validation->set_rules('email', 'email', 'required');
+
+        $this->form_validation->set_rules('profilefor', 'profile for', 'required');
+        $this->form_validation->set_rules('gender', 'gender', 'required');
+        $this->form_validation->set_rules('mothertongue', 'mother tongue', 'required');
+        $this->form_validation->set_rules('religion', 'religion', 'required');
+        $this->form_validation->set_rules('livein', 'livein', 'required');
+
+
+        if ($this->form_validation->run()) {
+            $this->reg_submit();
+        } else {
+            $this->view_data['update_errors'] = validation_errors();
+        }
+
+        $this->view_data['countries'] = $this->reg_model->get_contry_list();
+        $this->edit();
+    }
+
+    function reg_submit() {
+        $date = new DateTime();
+        $date->setDate($this->input->post('year'), $this->input->post('month'), $this->input->post('day'));
+        $date = $date->format('Y-m-d');
+        
+        $data = array(
+            'name' => $this->input->post('name'),
+            'email' => $this->input->post('email'),
+            'religion' => $this->input->post('religion'),
+            'profilefor' => $this->input->post('profilefor'),
+            'lan' => $this->input->post('mothertongue'),
+            'country' => $this->input->post('livein'),
+            'birthday' => $date,
+            'gender' => $this->input->post('gender')
+        );
+
+        // insert form data into database
+        $status = $this->user_model->updateUser($data);
+        if ($status === FALSE) {
+            echo 'profile update is failed';
+        } else {
+            echo 'profile updated succefully';
+        }
+    }
+
     //check auth in mycontroller
 }

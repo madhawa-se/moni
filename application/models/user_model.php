@@ -21,6 +21,20 @@ class user_model extends CI_Model {
         }
     }
 
+    function updateUser($data) {
+        //return $this->db->insert('user', $data);
+        //var_dump($data);
+
+        $this->db->trans_start();
+        $this->db->update('user', $data);
+        $this->db->trans_complete();
+        if (!$this->db->trans_status()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     function sendEmail($to_email, $rand, $uid) {
         $from_email = 'newleaf.lk';
         $subject = 'Verify Your Email Address';
@@ -117,9 +131,11 @@ class user_model extends CI_Model {
         $user_data = $this->get_user($email); //check null
 
         $data = $user_data;
-        $json_data= json_encode($data);
+        $json_data = json_encode($data);
         return $json_data;
     }
+    
+
 
 }
 

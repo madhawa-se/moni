@@ -17,14 +17,18 @@ class Home extends My_Controller {
 
     function index() {
         if ($this->loggedin) {
-            $login_data = $this->session->userdata('loggedin');
-            $uname = $login_data["username"];
-            ///echo ("hello $uname ! welcome back");
-            //$this->load->view('home', $this->view_data);
-            redirect('/profile');
+            $this->log_check();
         } else {
             $this->register();
         }
+    }
+
+    function log_check() {
+        $login_data = $this->session->userdata('loggedin');
+        $uname = $login_data["username"];
+        ///echo ("hello $uname ! welcome back");
+        //$this->load->view('home', $this->view_data);
+        redirect('/profile');
     }
 
     function register() {
@@ -77,7 +81,8 @@ class Home extends My_Controller {
             );
             //$this->session->sess_expiration = '14400';
             $this->session->set_userdata('loggedin', $logindata);
-            echo 'you are logged in';
+            //logged in success
+            $this->log_check();
         } else {
             echo 'login fail';
         }

@@ -19,7 +19,7 @@
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> 
         <link href="<?php echo base_url() ?>css/footer.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>css/form.css" rel="stylesheet">
-
+        <link href="<?php echo base_url() ?>css/menu.css" rel="stylesheet">
 
         <link rel="icon" href="favicon.jpg" type="image/gif" sizes="16x16">
 
@@ -37,11 +37,11 @@
         </script>
         <script src="<?php echo base_url() ?>js/app.js"></script>
         <script>
-        <?php
-        if (isset($jsondata)) {
-            echo "var jsonData=$jsondata";
-        }
-        ?>
+<?php
+if (isset($jsondata)) {
+    echo "var jsonData=$jsondata";
+}
+?>
         </script>
     </head>
 
@@ -160,7 +160,7 @@
                                         </ul>
                                         <ul class="nav navbar-nav navbar-right">
                                             <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $uname ?> </a></li>
-                                            <li><a href="#"><span class="glyphicon  glyphicon-off"></span> Logout</a></li>
+                                            <li><a href="<?php echo site_url('user/logout') ?>"><span class="glyphicon  glyphicon-off"></span> Logout</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -241,9 +241,9 @@
                                     <div class="well8">
 
 
-                                        <form ng-cloak ng-validate="true" action="<?php echo site_url('user/register'); ?>" novalidate="true"  class="form-horizontal" method="post" name="regform" ng-controller="formController" ng-submit="submitForm($event, regform.$valid)">
+                                        <form ng-cloak ng-validate="true" action="<?php echo site_url('profile/register'); ?>" novalidate="true"  class="form-horizontal" method="post" name="regform" ng-controller="formController" ng-submit="submitForm($event, regform.$valid)">
 
-                                            <?php if (isset($reg_errors)) echo $reg_errors; ?>
+                                            <?php if (isset($update_errors)) echo $update_errors; ?>
 
                                             <legend><font color="#de3075" size="6px" >edit profile</font></legend>
 
@@ -394,18 +394,8 @@
 
 
 
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label" for="textinput">Password</label>
-                                                <div class="col-md-9">
-                                                    <input id="password" name="password" type="password" placeholder="placeholder" class="form-control input-md" required>
-                                                    <p ng-show="regform.password.$invalid && (!regform.password.$pristine || submitted)" class="help-danger help">enter password</p>
-                                                </div>
-
-                                            </div>
-
-
                                             <div class="span3">
-                                                <input name="register" type="submit" value="Edit" class="button2" ng-click="submitted = true">
+                                                <input name="update" type="submit" value="Update" class="button2" ng-click="submitted = true">
                                             </div>
                                         </form>
                                     </div>
