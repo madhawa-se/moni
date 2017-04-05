@@ -14,9 +14,9 @@ class user_model extends CI_Model {
         $this->db->insert('user', $data);
         $insert_id = $this->db->insert_id();
         $this->db->trans_complete();
-        if(!$this->db->trans_status()){
+        if (!$this->db->trans_status()) {
             return false;
-        }else{
+        } else {
             return $insert_id;
         }
     }
@@ -86,17 +86,31 @@ class user_model extends CI_Model {
             return false;
         }
     }
-    
-    function is_user_exist($email){
+
+    function is_user_exist($email) {
         $this->db->from('user');
         $this->db->where('email', $email);
         $query = $this->db->get();
         $ret = $query->num_rows();
-        if($ret==0){
+        if ($ret == 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
+    }
+
+    function get_user($email) {
+
+        $this->db->from('user');
+        $this->db->where('email', $email);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row;
+        }
+
+        return false;
     }
 
 }

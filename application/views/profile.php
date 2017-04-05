@@ -169,7 +169,7 @@
                                 <li><a href="#"><span class="glyphicon glyphicon-search"></span> Search</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Madhawa</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $uname?> </a></li>
                                 <li><a href="#"><span class="glyphicon  glyphicon-off"></span> Logout</a></li>
                             </ul>
                         </div>
