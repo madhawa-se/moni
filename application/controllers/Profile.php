@@ -14,14 +14,22 @@ class Profile extends My_Controller {
     }
 
     public function index() {
+        $this->base_profile();
+    }
 
+    public function edit() {
+        $this->view_data["menu"]="edit";
+         $this->base_profile();
+    }
+
+    function base_profile() {
         $login_data = $this->session->userdata('loggedin');
         $email = $login_data["username"];
         if ($this->user_model->get_user($email) !== FALSE) {
             $this->view_data["uname"] = $this->user_model->get_user($email)->name;
             $this->load->view('profile', $this->view_data);
-        }else{
-            //temperary riderect add auth check to controller
+        } else {
+            redirect('/home');
         }
     }
 
