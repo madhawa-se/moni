@@ -42,7 +42,7 @@ class Home extends My_Controller {
             $this->form_validation->set_rules('email', 'email', 'required|callback_email_check');
             $this->form_validation->set_rules('password', 'password', 'required');
 
-            $this->form_validation->set_rules('profilefor', 'profile for', 'required');
+            $this->form_validation->set_rules('profile', 'profile for', 'required');
             $this->form_validation->set_rules('gender', 'gender', 'required');
             $this->form_validation->set_rules('mothertongue', 'mother tongue', 'required');
             $this->form_validation->set_rules('religion', 'religion', 'required');
@@ -107,7 +107,7 @@ class Home extends My_Controller {
             'rand' => $random,
             'activation' => '0',
             'religion' => $this->input->post('religion'),
-            'profilefor' => $this->input->post('profilefor'),
+            'profilefor' => $this->input->post('profile'),
             'lan' => $this->input->post('mothertongue'),
             'country' => $this->input->post('livein'),
             'birthday' => $date,

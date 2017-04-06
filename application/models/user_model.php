@@ -36,9 +36,14 @@ class user_model extends CI_Model {
     }
 
     function sendEmail($to_email, $rand, $uid) {
-        $from_email = 'newleaf.lk';
-        $subject = 'Verify Your Email Address';
+        $from_email = 'loveheart.lk';
+        $subject = 'Please validate your Marriage Proposal Sri Lanka';
         $message = 'Dear User,<br /><br />Please click on the below activation link to verify your email address.<br /><br /> http://localhost/newleaf/activate/' . $uid . '_' . $rand . '<br /><br /><br />Thanks<br />newleaf Team';
+        $message = "Hi Jayantha,<br>
+        Please validate your registration by clicking on the following link: <a href=". base_url()."activate/" . $uid . "_" . $rand." >activate my account</a><br>
+        Thank you!<br>
+        Regards, ".$from_email."<br>
+        ";
 
         $config['protocol'] = 'sendmail';
         $config['mailtype'] = 'html';
@@ -46,7 +51,7 @@ class user_model extends CI_Model {
         $config['newline'] = "\r\n";
         $this->email->initialize($config);
 
-        $this->email->from($from_email, 'test');
+        $this->email->from($from_email, "$from_email");
         $this->email->to($to_email);
         $this->email->subject($subject);
         $this->email->message($message);
@@ -134,8 +139,6 @@ class user_model extends CI_Model {
         $json_data = json_encode($data);
         return $json_data;
     }
-    
-
 
 }
 

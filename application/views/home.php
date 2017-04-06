@@ -35,7 +35,7 @@
         <script>
             var baseurl = "<?php echo base_url(); ?>";
         </script>
-        <script src="<?php echo base_url() ?>js/app.js"></script>
+        <script src="<?php echo base_url() ?>js/app.js?id=4"></script>
     </head>
 
 
