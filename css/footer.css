@@ -1,42 +1,42 @@
 body{background-color: lavenderblush;}
 
 .social-icon {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .social-icon li{
-  display: inline-block;
-  text-align: center;
+    display: inline-block;
+    text-align: center;
 }
 
 .social-icon a {
-  display: block;
-  width: 44px;
-  height: 44px;
-  line-height: 44px;
-  border-radius: 50%;
-  margin-right: 5px;
+    display: block;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 50%;
+    margin-right: 5px;
 }
 
 .social-icon a {
-  background: #ff0000; /* social icon background color */
-  color: #fff; /* social icon color */
+    background: #ff0000; /* social icon background color */
+    color: #fff; /* social icon color */
 }
 
 .social-icon a:hover {
-  background: #000; /* social icon hover background color */
-  color: #fff; /* social icon hover color */
+    background: #000; /* social icon hover background color */
+    color: #fff; /* social icon hover color */
 }
 
 .footer {
-/*  position: absolute;*/
-  bottom: 0;
-  padding-top: 5px;
-  width: 100%;
-  height: 60px;
- 
+    /*  position: absolute;*/
+    bottom: 0;
+    padding-top: 5px;
+    width: 100%;
+    height: 60px;
+
 }
 
 

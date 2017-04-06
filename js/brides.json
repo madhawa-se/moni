@@ -1,0 +1,158 @@
+{
+    "peoples": [
+        {
+            "loc": "jafna",
+            "brides": [
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 1
+                },
+                {
+                    "name": "madu",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 2
+                },
+                {
+                    "name": "tharini",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 3
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 4
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 5
+                }
+            ],
+            "grooms": [
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 6
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 7
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 8
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 9
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 10
+                }
+            ]
+        },
+        {
+            "loc": "colombo",
+            "brides": [
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 11
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 12
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 13
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 14
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 15
+                }
+            ],
+            "grooms": [
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 16
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 17
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 18
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 19
+                },
+                {
+                    "name": "saduni",
+                    "phone": "071784574",
+                    "country": "srilanka",
+                    "age": "21",
+                    "id": 20
+                }
+            ]
+        }
+    ]
+}

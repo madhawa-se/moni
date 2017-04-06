@@ -68,7 +68,7 @@ class Home extends My_Controller {
         }
         $this->view_data['countries'] = $this->reg_model->get_contry_list();
 
-        $timestamp = strtotime('-20 years');
+        $timestamp = strtotime('-18 years');
         $date = date('Y', $timestamp);
         $date = intval($date);
         $this->view_data['year_offset'] = $date;

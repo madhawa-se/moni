@@ -195,10 +195,18 @@
                                         </div>
                                         <div class="col-md-2">
                                             <select name="year" class = "form-control">
-                                                <option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option>
-                                                <option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option>
-                                                <option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option>
-                                                <option value="2013">2013</option>
+                                                <?php
+                                                if (isset($year_offset)) {
+                                                    for ($i = 0; $i < 100; $i++) {
+                                                        ?>
+                                                        <option value="<?php
+                                                        $year = ($year_offset - $i);
+                                                        echo $year
+                                                        ?>"><?php echo $year ?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
                                             </select>
                                         </div>
 
@@ -485,41 +493,40 @@
 
     </style>
     <div class="well8">
-        <div class="container">
+        <div class="container" ng-controller="formController">
             <div class="row">
                 <div class="col-md-4">
 
                     <h1><b>District</b></h1>
-                    <div class="col-md-4">
+                    <div class="col-md-4 locations">
 
-                        <a href="">Colombo</a><br>
-                        <a href="">Jaffna</a><br>
-                        <a href="">Galle</a><br>
-                        <a href="">Ampara</a><br>
-                        <a href="">Matale</a><br>
-                        <a href="">Badulla</a><br>
-                        <a href="">Batticaloa</a><br>
-                        <a href="">Hambantota</a><br>
-                        <a href="">Kalutara</a><br>
-                        <a href="">Kegalle</a><br>
-                        <a href="">Trincomale</a>
+                        <a href="" ng-click="loadBrides($event)">Colombo</a><br>
+                        <a href="" ng-click="loadBrides($event)">Jaffna</a><br>
+                        <a href="" ng-click="loadBrides($event)">Galle</a><br>
+                        <a href="" ng-click="loadBrides($event)">Ampara</a><br>
+                        <a href="" ng-click="loadBrides($event)">Matale</a><br>
+                        <a href="" ng-click="loadBrides($event)">Badulla</a><br>
+                        <a href="" ng-click="loadBrides($event)">Batticaloa</a><br>
+                        <a href="" ng-click="loadBrides($event)">Hambantota</a><br>
+                        <a href="" ng-click="loadBrides($event)">Kalutara</a><br>
+                        <a href="" ng-click="loadBrides($event)">Kegalle</a><br>
+                        <a href="" ng-click="loadBrides($event)">Trincomale</a>
 
                     </div>
 
 
-                    <div class="col-md-4" >
+                    <div class="col-md-4 locations" >
 
-                        <a href="">Killinochi</a><br>
-                        <a href="">Kurunagala</a><br>
-                        <a href="">Mannar</a><br>
-
-                        <a href="">Moneragala</a><br>
-                        <a href="">Mulaitivu</a><br>
-                        <a href="">Nuwara Eliya</a><br>
-                        <a href="">Polonnaruwa</a><br>
-                        <a href="">Puttalam</a><br>
-                        <a href="">Ratnapura</a><br>
-                        <a href="">Vavuniya</a><br>
+                        <a href=""ng-click="loadBrides($event)">Killinochi</a><br>
+                        <a href=""ng-click="loadBrides($event)">Kurunagala</a><br>
+                        <a href=""ng-click="loadBrides($event)">Mannar</a><br>
+                        <a href=""ng-click="loadBrides($event)">Moneragala</a><br>
+                        <a href=""ng-click="loadBrides($event)">Mulaitivu</a><br>
+                        <a href=""ng-click="loadBrides($event)">Nuwara Eliya</a><br>
+                        <a href=""ng-click="loadBrides($event)">Polonnaruwa</a><br>
+                        <a href=""ng-click="loadBrides($event)">Puttalam</a><br>
+                        <a href=""ng-click="loadBrides($event)">Ratnapura</a><br>
+                        <a href=""ng-click="loadBrides($event)">Vavuniya</a><br>
 
                         <a href="">Anuradhapura</a></li>
                     </div>
@@ -528,10 +535,10 @@
 
 
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-7 locations">
 
 
-                        <h2><b>Featured Profiles in<font color="red"> Colombo</font> District</b></h2>
+                        <h2><b>Featured Profiles in<font color="red"> {{selectedLoc}}</font> District</b></h2>
                         <div class="col-md-6">
 
 
@@ -556,34 +563,16 @@
 
                             <h4><b><button class="button5" >Groom</button></b></h4>
 
-                            <div class="col-md-6">	  
-                                <img src="<?php echo base_url() ?>images/1.jpg" class="img-circle" alt="Cinque Terre" width="100" height="100"> 
+
+                            <div class="col-md-6" ng-repeat="x in brideList.grooms track by $index">	  
+                                <img ng-src="<?php echo base_url() ?>images/profiles/grooms/p ({{x.id}}).jpg" class="img-circle" alt="{{x.name}}" width="100" height="100"> 
                                 <div class="caption">
 
-                                    <p><b>Bride</b>  0778956625<br>21, india<br> hgfsdkjgffshddhs<br>dfjhsdjhds</p>
+                                    <p>{{x.name}}<br>{{x.age}}, {{x.country}}</p>
                                 </div>
                             </div>	
 
-                            <div class="col-md-6">	  
-                                <img src="<?php echo base_url() ?>images/1.jpg" class="img-circle" alt="Cinque Terre" width="100" height="100"> 
-                                <div class="caption">
-                                    <p><b>Bride</b>  0778956625<br>21, india<br> hgfsdkjgffshddhs<br>dfjhsdjhds</p>
-                                </div>
-                            </div>	
 
-                            <div class="col-md-6">	  
-                                <img src="<?php echo base_url() ?>images/1.jpg" class="img-circle" alt="Cinque Terre" width="100" height="100"> 
-                                <div class="caption">
-                                    <p><b>Bride</b>  0778956625<br>21, india<br> hgfsdkjgffshddhs<br>dfjhsdjhds</p>
-                                </div>
-                            </div>	
-
-                            <div class="col-md-6">	  
-                                <img src="<?php echo base_url() ?>images/1.jpg" class="img-circle" alt="Cinque Terre" width="100" height="100"> 
-                                <div class="caption">
-                                    <p><b>Bride</b>  0778956625<br>21, india<br> hgfsdkjgffshddhs<br>dfjhsdjhds</p>
-                                </div>
-                            </div>		
 
                         </div>
 
@@ -599,31 +588,11 @@
 
                             <h4><b> <button class="button5" >Brides</button></b></h4>
 
-                            <div class="col-md-6">	  
-                                <img src="<?php echo base_url() ?>images/1.jpg" class="img-circle" alt="Cinque Terre" width="100" height="100"> 
+                            <div class="col-md-6" ng-repeat="x in brideList.brides track by $index">	  
+                                <img ng-src="<?php echo base_url() ?>images/profiles/brides/p ({{x.id}}).jpg" class="img-circle" alt="{{x.name}}" width="100" height="100"> 
                                 <div class="caption">
-                                    <p><b>Bride</b>  0778956625<br>21, india<br> hgfsdkjgffshddhs<br>dfjhsdjhds</p>
-                                </div>
-                            </div>	
 
-                            <div class="col-md-6">	  
-                                <img src="<?php echo base_url() ?>images/1.jpg" class="img-circle" alt="Cinque Terre" width="100" height="100"> 
-                                <div class="caption">
-                                    <p><b>Bride</b>  0778956625<br>21, india<br> hgfsdkjgffshddhs<br>dfjhsdjhds</p>
-                                </div>
-                            </div>	
-
-                            <div class="col-md-6">	  
-                                <img src="<?php echo base_url() ?>images/1.jpg" class="img-circle" alt="Cinque Terre" width="100" height="100"> 
-                                <div class="caption">
-                                    <p><b>Bride</b>  0778956625<br>21, india<br> hgfsdkjgffshddhs<br>dfjhsdjhds</p>
-                                </div>
-                            </div>	
-
-                            <div class="col-md-6">	  
-                                <img src="<?php echo base_url() ?>images/1.jpg" class="img-circle" alt="Cinque Terre" width="100" height="100"> 
-                                <div class="caption">
-                                    <p><b>Bride</b>  0778956625<br>21, india<br> hgfsdkjgffshddhs<br>dfjhsdjhds</p>
+                                    <p>{{x.name}}<br>{{x.age}}, {{x.country}}</p>
                                 </div>
                             </div>		
 
@@ -753,9 +722,9 @@
 
 
 
-                    <font color="red"> <b>Follow Us : </b> </font>        <li><a href="#" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- change the link to social page and edit title-->
-                    <li><a href="#" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                    <font color="black"> <b>Follow Us : </b> </font>        <li><a style="background-color: #295396;" href="#" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- change the link to social page and edit title-->
+                    <li><a style="background-color:#1DA1F3;" href="#" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a style="background-color:#DF4A32;" href="#" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
             </ul>
         </footer>
     </div>
