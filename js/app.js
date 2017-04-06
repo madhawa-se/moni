@@ -9,8 +9,9 @@ app.controller('formController', function ($scope, $http) {
     $scope.regex = 'm';
     $scope.formsubmitted = false;
     $scope.submitted = false;
-    $scope.countryList = {};
-    $scope.religionList = {};
+    $scope.countryList = [];
+    $scope.religionList = [];
+    $scope.profileForList=[];
     $scope.genders = [{id: "1", name: "male"}, {id: "2", name: "femail"}];
     $scope.submitForm = function ($event, $valid) {
         //alert(isValid);
@@ -23,9 +24,9 @@ app.controller('formController', function ($scope, $http) {
         var result = $.grep($scope.countryList, function (e) {
             return e.id == country;
         });
-        if (result[0] && result[0].code){
+        if (result[0] && result[0].code) {
             $scope.countrycode = ("+" + result[0].code);
-        }else{
+        } else {
             $scope.countrycode = ("code");
         }
 
@@ -61,14 +62,24 @@ app.controller('formController', function ($scope, $http) {
             alert(response.statusText);
         });
     };
+    $scope.getprofileForList = function () {
+        $http({
+            method: "GET",
+            url: baseurl + "Db_ajax/get_profile_for_list"
+        }).then(function mySucces(response) {
+            $scope.profileForList = response.data;
+        }, function myError(response) {
+            alert(response.statusText);
+        });
+    };
     $scope.selectData = function () {
         if (typeof jsonData !== 'undefined') {
             $scope.name = jsonData.name;
-            $scope.gender = {id: jsonData.gender+""};
-            $scope.religion_list = {id: jsonData.religion+""};
-            $scope.lan_list = {id: jsonData.lan+""};
+            $scope.gender = {id: jsonData.gender + ""};
+            $scope.religion_list = {id: jsonData.religion + ""};
+            $scope.lan_list = {id: jsonData.lan + ""};
             $scope.email = jsonData.email;
-            $scope.country_list = {id: jsonData.country+""};
+            $scope.country_list = {id: jsonData.country + ""};
             // $scope.fnumber=jsonData.;
 
         }
@@ -77,6 +88,7 @@ app.controller('formController', function ($scope, $http) {
     $scope.getCountryList();
     $scope.getReligionList();
     $scope.getLanList();
+    $scope.getprofileForList();
     $scope.selectData();
 
 });

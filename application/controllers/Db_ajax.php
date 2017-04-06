@@ -32,6 +32,12 @@ class Db_ajax extends CI_Controller{
         $json_list= json_encode($list);
         $this->json_out($json_list);
     }
+    function get_profile_for_list(){
+        $this->load->model('Reg_model');
+        $list=$this->Reg_model->get_profile_for_list();
+        $json_list= json_encode($list);
+        $this->json_out($json_list);
+    }
     
     function json_out($content){
         header('Content-Type: application/json');

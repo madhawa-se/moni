@@ -44,7 +44,7 @@
 
         <!--header starat-->
 
-        <?php echo $header?>
+        <?php echo $header ?>
 
         <!--header end-->
 
@@ -135,14 +135,11 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" >Profile for</label>
                                         <div class="col-md-9">
-                                            <select id="profile" name="profilefor" class="form-control">
+                                            <select id="profile" name="profile" ng-model="profile" class="form-control" ng-options="c.id as c.name  for c in profileForList track by c.id" required>
                                                 <option value="">--select--</option>
-                                                <option value="1">my self</option>
-                                                <option value="2">friends</option>
-                                                <option value="3">siblings</option>
-                                                <option value="3">relatives</option>
-
                                             </select>
+                                            <p ng-show="regform.profile.$invalid && (!regform.profile.$pristine || submitted)" class="help-danger help">Profile for is required.</p>
+
                                         </div>
                                     </div>
 
@@ -165,8 +162,6 @@
                                         <div class="col-md-9">
                                             <select id="gender" name="gender" class="form-control" ng-model="gender"  ng-options="c.id as c.name  for c in genders track by c.id" required >
                                                 <option value="">--select--</option>
-                                                <option value="1">male</option>
-                                                <option value="2">female</option>
                                             </select>
                                             <p ng-show="regform.gender.$invalid && (!regform.gender.$pristine || submitted)" class="help-danger help">please select your gender</p>
 
@@ -240,9 +235,9 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textinput">Email</label>
                                         <div class="col-md-9">
-                                            <input  name="email" model="email" type="text" placeholder="your email address" class="form-control input-md" required/>
-                                            <p ng-show="regform.email.$invalid && (!regform.email.$pristine || submitted)" class="help-danger help">You mail is required.</p>
-
+                                            <input  name="email" ng-model="email" type="email" placeholder="your email address" class="form-control input-md" required/>
+                                            <p ng-show="regform.email.$error.required && (!regform.email.$pristine || submitted)" class="help-danger help">You Email is required.</p>
+                                            <p ng-show="(!regform.email.$error.required && regform.email.$invalid) && (!regform.email.$pristine || submitted)" class="help-danger help">Enter a valid email</p>
                                         </div>
                                     </div>
 
@@ -251,7 +246,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="threshold">Living In</label>
                                         <div class="col-md-9">
-                                            <select id="livein" name="livein" class="form-control" ng-model="country_list" ng-change="updateCountry()"
+                                            <select id="livein" name="livein" class="form-control" ng-model="country_list" ng-change="updateCountry(country_list)"
                                                     ng-options="c.id as c.name  for c in countryList track by c.id" required>
 
                                                 <option data-country_code="00" value="">--select--</option>
@@ -273,7 +268,8 @@
 
 
                                         <div class="col-md-6">
-                                            <input id="fnumber" name="fnumber" type="number" placeholder="number" class="form-control input-md" required="">
+                                            <input id="fnumber" ng-model="fnumber" name="fnumber" type="number" placeholder="number" class="form-control input-md" required>
+                                            <p ng-show="regform.fnumber.$invalid && (regform.fnumber.$touched || submitted)" class="help-danger help">Enter a valid phone number</p>
                                         </div>
                                     </div>
 
@@ -282,15 +278,18 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textinput">Password</label>
                                         <div class="col-md-9">
-                                            <input id="password" name="password" type="password" placeholder="placeholder" class="form-control input-md" required>
-                                            <p ng-show="regform.password.$invalid && (!regform.password.$pristine || submitted)" class="help-danger help">enter password</p>
+                                            <input id="password" ng-model="password" name="password" type="password" placeholder="placeholder" class="form-control input-md" ng-minlength="5" required>
+                                            <p ng-show="regform.password.$error.required && (regform.password.$touched || submitted)" class="help-danger help">Enter password</p>
+                                            <p ng-show="regform.password.$error.minlength && (regform.password.$touched || submitted)" class="help-danger help">Password should be at least 5 character</p>
                                         </div>
 
                                     </div>
 
 
                                     <div class="span3">
-                                        <label><input type="checkbox" name="terms"> I agree with the <a href="#">Terms and Conditions</a>.</label>
+                                        <label><input type="checkbox" ng-model="terms" name="terms" required=""> I agree with the <a href="#">Terms and Conditions</a>.</label>
+                                        <p ng-show="regform.terms.$invalid && (regform.terms.$touched || submitted)" class="help-danger help">Accept the terms & conditions to proceed further</p>
+
                                         <input name="register" type="submit" value="Sign up" class="button2" ng-click="submitted = true">
                                     </div>
                                 </form>
