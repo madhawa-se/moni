@@ -149,7 +149,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textinput" align="left">Name</label>
                                         <div class="col-md-9">
-                                            <input id="name" ng-model="name" name="name" type="text" placeholder="your name" class="form-control input-md" required="">
+                                            <input id="name" ng-model="name" name="name" type="text" placeholder="Your name" class="form-control input-md" required="">
                                             <p ng-show="regform.name.$invalid && (!regform.name.$pristine || submitted)" class="help-danger help">You name is required.</p>
                                         </div>
 
@@ -243,7 +243,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textinput">Email</label>
                                         <div class="col-md-9">
-                                            <input  name="email" ng-model="email" type="email" placeholder="your email address" class="form-control input-md" required/>
+                                            <input  name="email" ng-model="email" type="email" placeholder="Your email address" class="form-control input-md" required/>
                                             <p ng-show="regform.email.$error.required && (!regform.email.$pristine || submitted)" class="help-danger help">You Email is required.</p>
                                             <p ng-show="(!regform.email.$error.required && regform.email.$invalid) && (!regform.email.$pristine || submitted)" class="help-danger help">Enter a valid email</p>
                                         </div>
@@ -271,12 +271,12 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textinput">Phone</label>
                                         <div class="col-md-3">
-                                            <input id="isd" name="countrycode" ng-model="countrycode" type="text" placeholder="code" class="form-control input-md" required="" readonly="true">
+                                            <input id="isd" name="countrycode" ng-model="countrycode" type="text" placeholder="Code" class="form-control input-md" required="" readonly="true">
                                         </div>
 
 
                                         <div class="col-md-6">
-                                            <input id="fnumber" ng-model="fnumber" name="fnumber" type="number" placeholder="number" class="form-control input-md" required>
+                                            <input id="fnumber" ng-model="fnumber" name="fnumber" type="number" placeholder="Number" class="form-control input-md" required>
                                             <p ng-show="regform.fnumber.$invalid && (regform.fnumber.$touched || submitted)" class="help-danger help">Enter a valid phone number</p>
                                         </div>
                                     </div>
@@ -286,7 +286,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textinput">Password</label>
                                         <div class="col-md-9">
-                                            <input id="password" ng-model="password" name="password" type="password" placeholder="placeholder" class="form-control input-md" ng-minlength="5" required>
+                                            <input id="password" ng-model="password" name="password" type="password" placeholder="Password" class="form-control input-md" ng-minlength="5" required>
                                             <p ng-show="regform.password.$error.required && (regform.password.$touched || submitted)" class="help-danger help">Enter password</p>
                                             <p ng-show="regform.password.$error.minlength && (regform.password.$touched || submitted)" class="help-danger help">Password should be at least 5 character</p>
                                         </div>

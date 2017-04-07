@@ -72,7 +72,7 @@ class Home extends My_Controller {
         $date = date('Y', $timestamp);
         $date = intval($date);
         $this->view_data['year_offset'] = $date;
-        
+
         $this->load->view('home', $this->view_data);
     }
 
@@ -122,7 +122,7 @@ class Home extends My_Controller {
         } else {
             $insert_id = $status;
             // send email
-            if ($this->user_model->sendEmail($this->input->post('email'), $insert_id, $random)) {
+            if ($this->sendRegEmail($this->input->post('email'), $insert_id, $random, $this->input->post('name'))) {
                 echo 'email sent please check your email address';
             }
         }
@@ -137,8 +137,9 @@ class Home extends My_Controller {
             $key = $pieces[0];
             //echo ($uid . ' x ' . $key);
             $status = $this->user_model->verifyEmailID($uid, $key);
-            if ($status == true) {
+            if ($status !== FALSE) {
                 echo 'account activated succefully<br>.login here';
+                $this->sendActivateEmail($status->email, $status->name, $status->email, $this->md5Dey($status->password));
             } else {
                 echo 'sorry!. account activation failed';
             }
@@ -152,6 +153,78 @@ class Home extends My_Controller {
         } else {
             return TRUE;
         }
+    }
+
+    function md5Dey($en_pass) {
+        $this->load->library('encrypt');
+        $de_pass = $this->encrypt->decode($en_pass, $this->config->item("encryption_key"));
+        echo $en_pass."   ".$this->config->item("encryption_key");
+        return $de_pass;
+    }
+
+    function sendActivateEmail($to_email,$name, $username, $password) {
+        $data = array();
+        $subject = 'Marriage Proposal Sri Lanka, Lanka Matrimony, Brides Sri Lanka - Registration successful!';
+        $data["title"] = "title";
+        $data["action"] = "Your Account Activated !";
+        $message = "Hi $name,
+You've successfully registered with loveheart .lk . Your account details as follows:
+<br>
+Username: $username<br>
+Password: $password<br>
+Thank you!
+
+";
+
+        $data["login_url"] = base_url();
+        $this->send_email($data, $subject, "email_templates/activated", $to_email, $message);
+    }
+
+    function sendRegEmail($to_email, $rand, $uid, $name) {
+        $data = array();
+        $subject = 'Please validate your Marriage Proposal Sri Lanka';
+        $data["title"] = "title";
+        $data["action"] = "Account Registration successful!";
+        $message = "Hi $name,
+Please validate your registration by clicking on the following link: <link>
+Thank you!<br>
+Regards , 
+loveheart.lk
+";
+
+        $data["activate_url"] = base_url() . 'activate/' . $uid . '_' . $rand;
+        $this->send_email($data, $subject, "email_templates/reg", $to_email, $message);
+    }
+
+    function send_email($data, $subject, $view_name, $to_email, $message) {
+
+        $from_email = 'loveheart.lk';
+        $company_name = 'Love Heart';
+        $site = base_url();
+
+        $data["company_name"] = $company_name;
+        $data["site"] = $site;
+        $data["from_email"] = $from_email;
+
+
+        $data["title"] = "title";
+        $data["message"] = $message;
+        $content = $this->load->view($view_name, $data, TRUE);
+        $data["subject"] = $subject;
+
+        $config['protocol'] = 'sendmail';
+        $config['mailtype'] = 'html';
+        $config['wordwrap'] = TRUE;
+        $config['newline'] = "\r\n";
+        $this->email->initialize($config);
+
+        $this->email->from($from_email, "$from_email");
+        $this->email->to($to_email);
+        $this->email->subject($subject);
+        $this->email->message($content);
+        //mad
+        echo $content;
+        return $this->email->send();
     }
 
 }
