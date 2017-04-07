@@ -36,7 +36,7 @@
         <script>
             var baseurl = "<?php echo base_url(); ?>";
         </script>
-        <script src="<?php echo base_url() ?>js/reset.js?id=4"></script>
+        <script src="<?php echo base_url() ?>js/resetpass.js?id=4"></script>
     </head>
 
 
@@ -94,48 +94,56 @@
 
                             <form ng-cloak ng-validate="true" action="<?php echo site_url('reset'); ?>" novalidate="true"  class="form-horizontal" method="post" name="regform" ng-controller="formResetController" ng-submit="submitForm($event, regform.$valid)">
 
-                                <?php echo validation_errors()?>
+                                <?php echo validation_errors() ?>
 
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="textinput" align="left">Email</label>
+                                    <label class="col-md-3 control-label" for="textinput" align="left">New Password</label>
                                     <div class="col-md-9">
-                                        <input  name="email" ng-model="email" type="email" placeholder="Your email address" class="form-control input-md" required/>
-                                        <p ng-show="regform.email.$error.required && (!regform.email.$pristine || submitted)" class="help-danger help">You Email is required.</p>
-                                        <p ng-show="(!regform.email.$error.required && regform.email.$invalid) && (!regform.email.$pristine || submitted)" class="help-danger help">Enter a valid email</p>
+                                        <input  name="pass1" ng-model="pass1" type="password" placeholder="Password" class="form-control input-md" required/>
+                                        <p ng-show="regform.pass1.$error.required && (!regform.pass1.$pristine || submitted)" class="help-danger help">Password is required.</p>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="textinput" align="left">Confirm Password</label>
+                                    <div class="col-md-9">
+                                        <input  name="pass2" ng-model="pass2" type="password" placeholder="Password" class="form-control input-md" required/>
 
+                                        <p ng-show="regform.pass1.$error.required && (!regform.pass1.$pristine || submitted)" class="help-danger help">Password is required.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="span3">
                                         <br>
                                         <input name="reset" type="submit" value="Reset Password" class="button2" ng-click="submitted = true">
                                     </div>
-
                                 </div>
-
-                            </form>
                         </div>
+
+                        </form>
                     </div>
-
-
                 </div>
-            </article>
-            <footer class="footer">
-
-                <ul class="social-icon animate pull-right">
-                    <div class="container">
 
 
+            </div>
+        </article>
+        <footer class="footer">
 
-                        <font color="black"> <b>Follow Us : </b> </font>        <li><a style="background-color: #295396;" href="#" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- change the link to social page and edit title-->
-                        <li><a style="background-color:#1DA1F3;" href="#" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                        <li><a style="background-color:#DF4A32;" href="#" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                </ul>
-            </footer>
-        </div>
+            <ul class="social-icon animate pull-right">
+                <div class="container">
 
 
 
+                    <font color="black"> <b>Follow Us : </b> </font>        <li><a style="background-color: #295396;" href="#" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- change the link to social page and edit title-->
+                    <li><a style="background-color:#1DA1F3;" href="#" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a style="background-color:#DF4A32;" href="#" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </footer>
     </div>
+
+
+
+</div>
 
 </body>
 </html>

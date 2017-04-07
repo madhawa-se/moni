@@ -53,6 +53,7 @@ class Reset extends CI_Controller {
             $status = $this->user_model->verify_reset($uid, $key);
             if ($status !== FALSE) {
                 echo 'you can reset now';
+                $this->load->view("reset_password");
             } else {
                 echo 'sorry!. either reset lnik expired or invalid';
             }
