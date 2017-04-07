@@ -29,7 +29,7 @@
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <input type="password" class="form-control" placeholder="Password" name="pass">
-                                        <div class="login-bottom-text hidden-sm"> Forgotten account?  </div>
+                                        <div class="login-bottom-text hidden-sm"> <a style="color:white" href="<?php echo site_url("Reset")?>">Forgotten account?</a> </div>
                                     </div>
                                 </div>
 

@@ -70,7 +70,7 @@
                             padding: 19px;
                             margin-bottom: 20px;
 
-                            background-color:#f2b7cf;
+                            background-color: rgb(253, 253, 253);
                             border: 1px solid @well-border;
                             border-radius: @border-radius-base;
                             .box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
@@ -79,7 +79,12 @@
                                 border-color: rgba(0,0,0,.15);
                             }
                         }
-
+                        .button2 {
+                            color: #FFF;
+                            background-color: #7140bc;
+                            width: 150px;
+                            height: 40px;
+                        } 
                     </style>
 
                     <div class="col-sm-6">
@@ -89,14 +94,20 @@
 
                             <form ng-cloak ng-validate="true" action="<?php echo site_url('reset'); ?>" novalidate="true"  class="form-horizontal" method="post" name="regform" ng-controller="formResetController" ng-submit="submitForm($event, regform.$valid)">
 
-                                <?php if (isset($reg_errors)) echo $reg_errors; ?>
+                                <?php echo validation_errors()?>
 
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="textinput" align="left">Name</label>
+                                    <label class="col-md-3 control-label" for="textinput" align="left">Email</label>
                                     <div class="col-md-9">
-                                        <input id="name" ng-model="name" name="name" type="text" placeholder="Your name" class="form-control input-md" required="">
-                                        <p ng-show="regform.name.$invalid && (!regform.name.$pristine || submitted)" class="help-danger help">You name is required.</p>
+                                        <input  name="email" ng-model="email" type="email" placeholder="Your email address" class="form-control input-md" required/>
+                                        <p ng-show="regform.email.$error.required && (!regform.email.$pristine || submitted)" class="help-danger help">You Email is required.</p>
+                                        <p ng-show="(!regform.email.$error.required && regform.email.$invalid) && (!regform.email.$pristine || submitted)" class="help-danger help">Enter a valid email</p>
+                                    </div>
+
+                                    <div class="span3">
+                                        <br>
+                                        <input name="reset" type="submit" value="Reset Password" class="button2" ng-click="submitted = true">
                                     </div>
 
                                 </div>

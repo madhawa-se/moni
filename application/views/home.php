@@ -128,7 +128,7 @@
 
                                 <form ng-cloak ng-validate="true" action="<?php echo site_url('home/register'); ?>" novalidate="true"  class="form-horizontal" method="post" name="regform" ng-controller="formController" ng-submit="submitForm($event, regform.$valid)">
 
-                                    <?php if (isset($reg_errors)) echo $reg_errors; ?>
+                                    <?php echo validation_errors()?>
 
                                     <legend><font color="#de3075" size="6px" >Register Free</font></legend>
 
