@@ -1,5 +1,5 @@
 .nav > li > a:hover{
-    background-color: #2ad4d4 !important;
+    background-color: rgba(128, 90, 195, 0.67) !important;
     color: white !important;
     border-radius: 4px;
 }

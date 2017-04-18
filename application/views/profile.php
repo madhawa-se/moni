@@ -28,7 +28,7 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
 
 
         <script src="<?php echo base_url() ?>js/angular.js"></script>
@@ -43,6 +43,29 @@ if (isset($jsondata)) {
 }
 ?>
         </script>
+
+        <style>
+            .tabs{
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+
+            }
+            .tabs.verticle-tabs li{
+                padding: 20px;
+                background-color: rgb(255, 255, 255);
+                margin-bottom: 10px;
+                border-radius: 4px;
+                color: #FF9800;
+                text-align: center;
+            }
+
+            /*   bootstrap overide  */
+            .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+                background-color: rgba(233, 30, 99, 0.54);
+            }
+            /* - bootstrap overide  */
+        </style>
     </head>
 
 
@@ -236,231 +259,427 @@ if (isset($jsondata)) {
                         <!-- form -->
                         <div class="container">
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <h3 align="center"><b> Edit profile</b> </h3>
-                                    <div class="well8">
-
-
-                                        <form ng-cloak ng-validate="true" action="<?php echo site_url('profile/register'); ?>" novalidate="true"  class="form-horizontal" method="post" name="regform" ng-controller="formController" ng-submit="submitForm($event, regform.$valid)">
-
-                                            <?php if (isset($update_errors)) echo $update_errors; ?>
-
-                                            <legend><font color="#de3075" size="6px" >edit profile</font></legend>
-
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label" >Profile for</label>
-                                                <div class="col-md-9">
-                                                    <select id="profile" name="profilefor" class="form-control">
-                                                        <option value="">--select--</option>
-                                                        <option value="1">my self</option>
-                                                        <option value="2">friends</option>
-                                                        <option value="3">siblings</option>
-                                                        <option value="3">relatives</option>
-
-                                                    </select>
-                                                </div>
-                                            </div>
+                                <div class="col-md-2">
+                                    <div>
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li class="active"><a  data-toggle="pill" href="#basic">Basic Info</a></li>
+                                            <li><a data-toggle="pill" href="#menu1">About Me</a></li>
+                                            <li><a  data-toggle="pill" href="#home">Life Style</a></li>
+                                            <li><a  data-toggle="pill" href="#family">Family</a></li>
+                                            <li><a  data-toggle="pill" href="#">My Partner</a></li>
+                                            <li><a  data-toggle="pill" href="#photos">Photos</a></li>
+                                            <li><a  data-toggle="pill" href="#horoscope">Horoscope</a></li>
+                                            <li><a  data-toggle="pill" href="#">Alerts</a></li>
+                                            <li><a  data-toggle="pill" href="#delete">Delete</a></li>
+                                        </ul>
 
 
 
 
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label" for="textinput" align="left">Name</label>
-                                                <div class="col-md-9">
-                                                    <input id="name" ng-model="name" name="name" type="text" placeholder="your name" class="form-control input-md" required="">
-                                                    <p ng-show="regform.name.$invalid && (!regform.name.$pristine || submitted)" class="help-danger help">You name is required.</p>
-                                                </div>
-
-                                            </div>
-
-
-
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label" for="notifymode">Gender</label>
-                                                <div class="col-md-9">
-                                                    <select id="gender" name="gender" class="form-control" ng-model="gender"  ng-options="c.id as c.name  for c in genders track by c.id" required >
-                                                        <option value="">--select--</option>
-                                                        <option value="1">male</option>
-                                                        <option value="2">female</option>
-                                                    </select>
-                                                    <p ng-show="regform.gender.$invalid && (!regform.gender.$pristine || submitted)" class="help-danger help">please select your gender</p>
-
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label" for="notifymode">Date of Birth</label>
-
-
-                                                <div class="col-md-2">
-                                                    <select name="month" class = "form-control">
-                                                        <option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option>
-                                                        <option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option>
-                                                        <option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option>
-                                                        <option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <select name="day" class = "form-control" ng-model="day">
-                                                        <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                                                        <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
-                                                        <option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
-                                                        <option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option>
-                                                        <option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="21">21</option>
-                                                        <option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option>
-                                                        <option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option>
-                                                        <option value="30">30</option><option value="31">31</option>
-                                                    </select>                        
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <select name="year" class = "form-control">
-                                                        <option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option>
-                                                        <option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option>
-                                                        <option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option>
-                                                        <option value="2013">2013</option>
-                                                    </select>
-                                                </div>
-
-                                            </div>
-
-
-
-
-
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label" for="threshold">Religion</label>
-                                                <div class="col-md-9">
-                                                    <select id="religion" name="religion"  ng-model="religion_list" class="form-control" ng-options="c.id as c.name  for c in religionList track by c.id" required>
-                                                        <option value="">--select--</option>
-                                                    </select>
-                                                    <p ng-show="regform.religion.$invalid && (regform.religion.$touched || submitted)" class="help-danger help">select your religion</p>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label" for="threshold">Mother Tongue</label>
-                                                <div class="col-md-9">
-                                                    <select id="mothertongue" name="mothertongue" ng-model="lan_list" class="form-control" ng-options="c.id as c.name  for c in lanList track by c.id" required>
-                                                        <option value="">--select--</option>
-                                                    </select>
-                                                    <p ng-show="regform.mothertongue.$invalid && (regform.mothertongue.$touched || submitted)" class="help-danger help">select your language</p>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label" for="textinput">Email</label>
-                                                <div class="col-md-9">
-                                                    <input  name="email" ng-model="email" type="text" placeholder="your email address" class="form-control input-md" required/>
-                                                    <p ng-show="regform.email.$invalid && (!regform.email.$pristine || submitted)" class="help-danger help">You mail is required.</p>
-
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label" for="threshold">Living In</label>
-                                                <div class="col-md-9">
-                                                    <select id="livein" name="livein" class="form-control" ng-model="country_list" ng-change="updateCountry(country_list)"
-                                                            ng-options="c.id as c.name  for c in countryList track by c.id" required>
-
-                                                        <option data-country_code="00" value="">--select--</option>
-
-                                                        <!-- <option ng-repeat="country in countryList" data-country_code="{{country.code}}" value="{{country.id}}">{{country.name}}</option>-->
-
-                                                    </select>
-                                                    <p ng-show="regform.livein.$invalid && (regform.livein.$touched || submitted)" class="help-danger help">country is required.</p>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label" for="textinput">Phone</label>
-                                                <div class="col-md-3">
-                                                    <input id="isd" name="countrycode" ng-model="countrycode" type="text" placeholder="code" class="form-control input-md" required="" readonly="true" value="{{country_list}}">
-                                                </div>
-
-
-                                                <div class="col-md-6">
-                                                    <input id="fnumber" name="fnumber" ng-model="fnumber" type="number" placeholder="number" class="form-control input-md" required="">
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="span3">
-                                                <input name="update" type="submit" value="Update" class="button2" ng-click="submitted = true">
-                                            </div>
-                                        </form>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                     <h3 align="center"><b>‫⁮</b>‫⁮.</h3>
-                                    <div class="well8">
-                                        <form>
-                                            <div class="form-group">
-                                                <label class="col-md-5 control-label" >Profile Image</label>
-                                                <div class="col-md-7">
-                                                    <div class="profile-img">
-                                                        <img class="img-responsive img-circle" style="max-width:100px" src="<?php echo base_url() ?>images/profile.png"/>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h3 align="center"><b> Edit profile</b> </h3>
+                                            <style>
+                                                /*mad */
+                                                .radio-inline , .checkbox-inline {
+                                                    margin-top: 0;
+                                                    margin-left: 10px;
+                                                }
+                                            </style>
+                                            <div class="well8">
+
+                                                <div class="tab-content">
+                                                    <div id="basic" class="tab-pane fade in active">
+                                                        <form ng-cloak ng-validate="true" action="<?php echo site_url('profile/register'); ?>" novalidate="true"  class="form-horizontal" method="post" name="regform" ng-controller="formController" ng-submit="submitForm($event, regform.$valid)">
+
+                                                            <?php if (isset($update_errors)) echo $update_errors; ?>
+
+                                                            <legend><font color="#de3075" size="6px" >edit profile</font></legend>
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" >Profile for</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="profile" name="profilefor" class="form-control">
+                                                                        <option value="">--select--</option>
+                                                                        <option value="1">my self</option>
+                                                                        <option value="2">friends</option>
+                                                                        <option value="3">siblings</option>
+                                                                        <option value="3">relatives</option>
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" for="textinput" align="left">Name</label>
+                                                                <div class="col-md-9">
+                                                                    <input id="name" ng-model="name" name="name" type="text" placeholder="your name" class="form-control input-md" required="">
+                                                                    <p ng-show="regform.name.$invalid && (!regform.name.$pristine || submitted)" class="help-danger help">You name is required.</p>
+                                                                </div>
+
+                                                            </div>
+
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" for="notifymode">Gender</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control" ng-model="gender"  ng-options="c.id as c.name  for c in genders track by c.id" required >
+                                                                        <option value="">--select--</option>
+                                                                        <option value="1">male</option>
+                                                                        <option value="2">female</option>
+                                                                    </select>
+                                                                    <p ng-show="regform.gender.$invalid && (!regform.gender.$pristine || submitted)" class="help-danger help">please select your gender</p>
+
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" for="notifymode">Date of Birth</label>
+
+
+                                                                <div class="col-md-2">
+                                                                    <select name="month" class = "form-control">
+                                                                        <option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option>
+                                                                        <option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option>
+                                                                        <option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option>
+                                                                        <option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <select name="day" class = "form-control" ng-model="day">
+                                                                        <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                                                                        <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                                                                        <option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                                                                        <option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option>
+                                                                        <option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="21">21</option>
+                                                                        <option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option>
+                                                                        <option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option>
+                                                                        <option value="30">30</option><option value="31">31</option>
+                                                                    </select>                        
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <select name="year" class = "form-control">
+                                                                        <option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option>
+                                                                        <option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option>
+                                                                        <option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option>
+                                                                        <option value="2013">2013</option>
+                                                                    </select>
+                                                                </div>
+
+                                                            </div>
+
+
+
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" for="threshold">Religion</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="religion" name="religion"  ng-model="religion_list" class="form-control" ng-options="c.id as c.name  for c in religionList track by c.id" required>
+                                                                        <option value="">--select--</option>
+                                                                    </select>
+                                                                    <p ng-show="regform.religion.$invalid && (regform.religion.$touched || submitted)" class="help-danger help">select your religion</p>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" for="threshold">Mother Tongue</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="mothertongue" name="mothertongue" ng-model="lan_list" class="form-control" ng-options="c.id as c.name  for c in lanList track by c.id" required>
+                                                                        <option value="">--select--</option>
+                                                                    </select>
+                                                                    <p ng-show="regform.mothertongue.$invalid && (regform.mothertongue.$touched || submitted)" class="help-danger help">select your language</p>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" for="textinput">Email</label>
+                                                                <div class="col-md-9">
+                                                                    <input  name="email" ng-model="email" type="text" placeholder="your email address" class="form-control input-md" required/>
+                                                                    <p ng-show="regform.email.$invalid && (!regform.email.$pristine || submitted)" class="help-danger help">You mail is required.</p>
+
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" for="threshold">Living In</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="livein" name="livein" class="form-control" ng-model="country_list" ng-change="updateCountry(country_list)"
+                                                                            ng-options="c.id as c.name  for c in countryList track by c.id" required>
+
+                                                                        <option data-country_code="00" value="">--select--</option>
+
+                                                                        <!-- <option ng-repeat="country in countryList" data-country_code="{{country.code}}" value="{{country.id}}">{{country.name}}</option>-->
+
+                                                                    </select>
+                                                                    <p ng-show="regform.livein.$invalid && (regform.livein.$touched || submitted)" class="help-danger help">country is required.</p>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" for="textinput">Phone</label>
+                                                                <div class="col-md-3">
+                                                                    <input id="isd" name="countrycode" ng-model="countrycode" type="text" placeholder="code" class="form-control input-md" required="" readonly="true" value="{{country_list}}">
+                                                                </div>
+
+
+                                                                <div class="col-md-6">
+                                                                    <input id="fnumber" name="fnumber" ng-model="fnumber" type="number" placeholder="number" class="form-control input-md" required="">
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-5 control-label" >Profile Image</label>
+                                                                <div class="col-md-7">
+                                                                    <div class="profile-img">
+                                                                        <img class="img-responsive img-circle" style="max-width:100px" src="<?php echo base_url() ?>images/profile.png"/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <input type="file" value="upload"/>
+                                                                </div>
+
+
+                                                                <div class="span3">
+                                                                    <input name="update" type="submit" value="Update" class="button2" ng-click="submitted = true">
+                                                                </div>
+
+
+                                                            </form>
+                                                        </div>
+
+                                                        <div id="family" class="tab-pane fade">
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" >Family Value</label>
+                                                                <div class="col-md-9">
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Orthodox
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Traditional
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Moderate
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Liberal
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" >Family Type</label>
+                                                                <div class="col-md-9">
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Joint family
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Nuclear family
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="threshold">Family Status</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="family_status">
+                                                                        <option value="">--select--</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="threshold">Ancestral / Family Origin</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="family_status">
+                                                                        <option value="">--select--</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="threshold">Ethnicity</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="family_status">
+                                                                        <option value="">--select--</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="textinput" align="left">Mother's Occupation</label>
+                                                                <div class="col-md-9">
+                                                                    <input id="name" ng-model="name" name="name" type="text" placeholder="your name" class="form-control input-md" required="">
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="textinput" align="left">Father's Occupation</label>
+                                                                <div class="col-md-9">
+                                                                    <input id="name" ng-model="name" name="name" type="text" placeholder="your name" class="form-control input-md" required="">
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="textinput" align="left">No. of Brothers</label>
+                                                                <div class="col-md-9">
+                                                                    <input id="name" ng-model="name" name="name" type="text" placeholder="your name" class="form-control input-md" required="">
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="textinput" align="left">Brothers Married</label>
+                                                                <div class="col-md-9">
+                                                                    <input id="name" ng-model="name" name="name" type="text" placeholder="your name" class="form-control input-md" required="">
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="textinput" align="left">No. of Sisters</label>
+                                                                <div class="col-md-9">
+                                                                    <input id="name" ng-model="name" name="name" type="text" placeholder="your name" class="form-control input-md" required="">
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="textinput" align="left">Sisters Married</label>
+                                                                <div class="col-md-9">
+                                                                    <input id="name" ng-model="name" name="name" type="text" placeholder="your name" class="form-control input-md" required="">
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div id="photos" class="tab-pane fade">
+                                                            <p>Did you know that profiles with photos get 20 times more response?
+                                                                Add upto 10 photos and see the difference.</p>
+                                                            <div>
+                                                                <img style="max-width: 100px" src="https://assets.materialup.com/uploads/9b911507-494a-4534-bdfb-81bb68bf6495/512x512.png" class="img-responsive"/>
+                                                            </div>
+                                                            <button >Upload Images</button>
+                                                            <br>
+                                                            <small>
+                                                                Note that you can add up to 10 photos to your profile. As a free member, you can view only 1 photo posted by members. To view all the photographs the members have posted, you must become a premium member. Click here to PAY NOW.
+                                                            </small>
+                                                        </div>
+                                                        <div id="horoscope" class="tab-pane fade">
+                                                           
+                                                            <div>
+                                                                <img style="max-width: 100px" src="https://assets.materialup.com/uploads/9b911507-494a-4534-bdfb-81bb68bf6495/512x512.png" class="img-responsive"/>
+                                                            </div>
+                                                            <button >Upload Horoscope</button>
+                                                            <br>
+                                      
+                                                        </div>
+
+                                                        <div id="delete" class="tab-pane fade">
+                                                            <p>Hide your profile</p>
+                                                            <p>
+                                                                Want to take a short break from your life partner search? You can still use all of the site's features, but other members will not be able to see you.
+                                                                Yes, I want to hide my profile </p>
+                                                            <div class="form-group clearfix">
+                                                                <div class="col-md-9">
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Yes, I want to hide my profile
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <p>Permanently delete your profile</p>
+                                                            <p>
+                                                                This action is permanent. Profile once deleted cannot be restored.
+                                                                Yes, I want to delete my profile
+                                                            </p>
+
+                                                            <div class="form-group clearfix">
+                                                                <div class="col-md-9">
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Yes, I want to delete my profile
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
                                                     </div>
+
                                                 </div>
-                                                <input type="file" value="upload"/>
                                             </div>
-                                        </form>
+
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- form -->
-                    <?php } ?>
-
-                    <div class="well4">
-                        <div class="container">
-                            <h4><b>Browse Matrimoney profile by</b></h4>
-
-                            <div class="wel">
-                                <div class="col-md-6">
-                                    <h5><b>Religion :</b></h5>
-                                    Hindu : <a href="">Hindu Brides</a> | <a href="">Hindu Grooms</a><br>
-                                    Muslim : <a href="">Muslim Brides</a> | <a href="">Muslim Grooms</a><br>
-                                    Christian : <a href="">Christian Brides</a> | <a href="">Christian Grooms</a><br>
-                                    Buddhist : <a href="">Buddhist Brides</a> | <a href="">Buddhist Grooms</a>
-
-                                </div>
-
-                                <div class="col-md-6">
-                                    <h5><b>Language :</b></h5>
-                                    Sinhala : <a href="">Sinhala Brides</a> | <a href="">Sinhala Grooms</a><br>
-                                    Tamil : <a href="">Tamil Brides</a> | <a href="">Tamil Grooms</a><br>
-                                    Malay : <a href="">Malay Brides</a> | <a href="">Malay Grooms</a><br>
-
-
-                                    <h5><b>Lives in:</b></h5>
-                                    <a href="">Sri Lanka</a> | <a href="">UAE</a>
-                                    <a href="">UK</a> | <a href="">Qatar</a>
-                                    <a href="">India</a> | <a href="">Saudi Arabia</a> | <a href="">Australia</a><br>
-
-
-                                </div>
 
 
                             </div>
+                            <!-- form -->
+                        <?php } ?>
 
+                        <div class="well4">
+                            <div class="container">
+                                <h4><b>Browse Matrimoney profile by</b></h4>
+
+                                <div class="wel">
+                                    <div class="col-md-6">
+                                        <h5><b>Religion :</b></h5>
+                                        Hindu : <a href="">Hindu Brides</a> | <a href="">Hindu Grooms</a><br>
+                                        Muslim : <a href="">Muslim Brides</a> | <a href="">Muslim Grooms</a><br>
+                                        Christian : <a href="">Christian Brides</a> | <a href="">Christian Grooms</a><br>
+                                        Buddhist : <a href="">Buddhist Brides</a> | <a href="">Buddhist Grooms</a>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <h5><b>Language :</b></h5>
+                                        Sinhala : <a href="">Sinhala Brides</a> | <a href="">Sinhala Grooms</a><br>
+                                        Tamil : <a href="">Tamil Brides</a> | <a href="">Tamil Grooms</a><br>
+                                        Malay : <a href="">Malay Brides</a> | <a href="">Malay Grooms</a><br>
+
+
+                                        <h5><b>Lives in:</b></h5>
+                                        <a href="">Sri Lanka</a> | <a href="">UAE</a>
+                                        <a href="">UK</a> | <a href="">Qatar</a>
+                                        <a href="">India</a> | <a href="">Saudi Arabia</a> | <a href="">Australia</a><br>
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                </div></div>
+                    </div></div>
 
 
-            <br>
-            <style>
-                .well9 {
+                <br>
+                <style>
+                    .well9 {
 
 
                     margin-bottom: 0px;

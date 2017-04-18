@@ -107,7 +107,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label" for="textinput" align="left">Confirm Password</label>
                                     <div class="col-md-9">
-                                        <input  name="pass2" ng-model="pass2" type="password" placeholder="Password" class="form-control input-md" required/>
+                                        <input  name="pass2" ng-model="registration.user.password" type="password" placeholder="Password" class="form-control input-md" required/>
 
                                         <p ng-show="regform.pass1.$error.required && (!regform.pass1.$pristine || submitted)" class="help-danger help">Password is required.</p>
                                     </div>
@@ -118,6 +118,10 @@
                                         <input name="reset" type="submit" value="Reset Password" class="button2" ng-click="submitted = true">
                                     </div>
                                 </div>
+                                <input type="password" name="confirmPassword" 
+                                       ng-model="registration.user.confirmPassword"
+                                       required 
+                                       compare-to="registration.user.password" />
                         </div>
 
                         </form>

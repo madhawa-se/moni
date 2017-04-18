@@ -91,7 +91,7 @@
                             }
 
                         </style>
-                        <img class="img3" height="550px" src="<?php echo base_url() ?>images/map3.png" align="center">
+                        <img class="img3" height="450px" src="<?php echo base_url() ?>images/map3.png" align="center">
 
                     </div>	
 
