@@ -263,7 +263,7 @@ if (isset($jsondata)) {
                                     <div>
                                         <ul class="nav nav-pills nav-stacked">
                                             <li class="active"><a  data-toggle="pill" href="#basic">Basic Info</a></li>
-                                            <li><a data-toggle="pill" href="#menu1">About Me</a></li>
+                                            <li><a data-toggle="pill" href="#aboutme">About Me</a></li>
                                             <li><a  data-toggle="pill" href="#home">Life Style</a></li>
                                             <li><a  data-toggle="pill" href="#family">Family</a></li>
                                             <li><a  data-toggle="pill" href="#">My Partner</a></li>
@@ -281,7 +281,6 @@ if (isset($jsondata)) {
                                 <div class="col-md-9">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <h3 align="center"><b> Edit profile</b> </h3>
                                             <style>
                                                 /*mad */
                                                 .radio-inline , .checkbox-inline {
@@ -292,12 +291,23 @@ if (isset($jsondata)) {
                                             <div class="well8">
 
                                                 <div class="tab-content">
+                                                    <style>
+                                                        .tab-pane h4,  .tab-pane .h4 {
+                                                            font-size: 18px;
+                                                            border-top: 4px solid rgba(255, 152, 0, 0.48);
+                                                            padding: 10px;
+                                                            color: black;
+                                                            /* border-radius: 5px; */
+                                                            /* background-color: rgba(103, 58, 183, 0.34); */
+                                                        }
+                                                        .tab-pane{
+                                                            margin-bottom: 40px;
+                                                        }
+                                                    </style>
                                                     <div id="basic" class="tab-pane fade in active">
                                                         <form ng-cloak ng-validate="true" action="<?php echo site_url('profile/register'); ?>" novalidate="true"  class="form-horizontal" method="post" name="regform" ng-controller="formController" ng-submit="submitForm($event, regform.$valid)">
 
                                                             <?php if (isset($update_errors)) echo $update_errors; ?>
-
-                                                            <legend><font color="#de3075" size="6px" >edit profile</font></legend>
 
                                                             <div class="form-group">
                                                                 <label class="col-md-3 control-label" >Profile for</label>
@@ -571,7 +581,9 @@ if (isset($jsondata)) {
                                                                 </div>
 
                                                             </div>
-
+                                                            <div class="span3">
+                                                                <input name="update" type="submit" value="Update" class="button2" ng-click="submitted = true">
+                                                            </div>
                                                         </div>
                                                         <div id="photos" class="tab-pane fade">
                                                             <p>Did you know that profiles with photos get 20 times more response?
@@ -584,15 +596,20 @@ if (isset($jsondata)) {
                                                             <small>
                                                                 Note that you can add up to 10 photos to your profile. As a free member, you can view only 1 photo posted by members. To view all the photographs the members have posted, you must become a premium member. Click here to PAY NOW.
                                                             </small>
+                                                            <div class="span3">
+                                                                <input name="update" type="submit" value="Update" class="button2" ng-click="submitted = true">
+                                                            </div>
                                                         </div>
                                                         <div id="horoscope" class="tab-pane fade">
-                                                           
+
                                                             <div>
                                                                 <img style="max-width: 100px" src="https://assets.materialup.com/uploads/9b911507-494a-4534-bdfb-81bb68bf6495/512x512.png" class="img-responsive"/>
                                                             </div>
                                                             <button >Upload Horoscope</button>
                                                             <br>
-                                      
+                                                            <div class="span3">
+                                                                <input name="update" type="submit" value="Update" class="button2" ng-click="submitted = true">
+                                                            </div>
                                                         </div>
 
                                                         <div id="delete" class="tab-pane fade">
@@ -623,102 +640,339 @@ if (isset($jsondata)) {
 
                                                                 </div>
                                                             </div>
-
+                                                            <div class="span3">
+                                                                <input name="update" type="submit" value="Update" class="button2" ng-click="submitted = true">
+                                                            </div>
 
                                                         </div>
+
+                                                        <div id="aboutme" class="tab-pane fade">
+
+                                                            <h4>Basic Information</h4>
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" for="notifymode">Marital Status</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control">
+                                                                        <option value="">--select--</option>
+                                                                        <option value="1">unmarried</option>
+                                                                        <option value="2">female</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" for="notifymode">Weight</label>
+                                                                <div class="col-md-9">
+                                                                    <div class="input-group">
+                                                                        <input id="msg" type="number" class="form-control" name="msg" placeholder="weight">
+                                                                        <span class="input-group-addon">Kg</span>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label" for="notifymode">Height</label>
+                                                                <div class="col-md-9">
+                                                                    <div class="input-group">
+                                                                        <input id="msg" type="number" class="form-control" name="msg" placeholder="weight">
+                                                                        <span class="input-group-addon">cm</span>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" >Body Type</label>
+                                                                <div class="col-md-9">
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Slim
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Athletic
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Average
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Heavy
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" >Complexion</label>
+                                                                <div class="col-md-9">
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Very Fair
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Fair
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Wheatish brown
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Dark
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" >Physical Status</label>
+                                                                <div class="col-md-9">
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">Normal
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="optradio">NormalPhysically challenged
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">Mother Tongue</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control">
+                                                                        <option value="">--select--</option>
+                                                                        <option value="1">Sinhala</option>
+                                                                        <option value="2">English</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">Spoken Languages</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control">
+                                                                        <option value="">--select--</option>
+                                                                        <option value="1">Sinhala</option>
+                                                                        <option value="2">English</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+                                                            <br><br>
+                                                            <h4>
+                                                                current background
+                                                            </h4>
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">religion</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control">
+                                                                        <option value="">--select--</option>
+                                                                        <option value="1">Buddhism</option>
+                                                                        <option value="2">Muslim</option>
+                                                                        <option value="3">cathalic</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">Education Level</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control">
+                                                                        <option value="0">--- Select ---</option><option value="1">High School</option><option value="2">Trade School</option><option value="3">Diploma</option><option value="4" selected="">Bachelors</option><option value="5">Masters</option><option value="6">Doctorate</option>		
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">Field of Education</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control">
+                                                                        <option value="0">--- Select ---</option><option value="1" selected="">Arts</option><option value="2">Accountancy</option><option value="3">Architecture</option><option value="4">Business Administration</option><option value="5">Business Management</option><option value="6">Civil</option><option value="7">Commerce</option><option value="8">Computer Science (hardware)</option><option value="9">Computer Science (software)</option><option value="10">Economics</option><option value="11">Education</option><option value="12">Engineering</option><option value="13">Information Technology</option><option value="14">Journalism</option><option value="15">Law</option><option value="16">Library Science</option><option value="17">Mathematics</option><option value="18">Medicine</option><option value="19">Mechanical</option><option value="20">Music</option><option value="21">Nursing/Health Science</option><option value="22">Pharmacy</option><option value="23">Public Administration</option><option value="24">Science</option><option value="9997">Others</option>	
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">Occupation Level</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control">
+                                                                        <option value="">--select--</option>
+                                                                        <option value="1">Buddhism</option>
+                                                                        <option value="2">Muslim</option>
+                                                                        <option value="3">cathalic</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">Annual income</label>
+                                                                <div class="col-md-9">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">LKR</span>
+                                                                        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                                                        <span class="input-group-addon">.00</span>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <br><br>
+                                                            <h4>
+                                                                Location
+                                                            </h4>
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">Place Of Birth</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control">
+                                                                        <option value="">--select--</option>
+                                                                        <option value="1">Buddhism</option>
+                                                                        <option value="2">Muslim</option>
+                                                                        <option value="3">cathalic</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">Country Living in</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control">
+                                                                        <option value="0">--- Select ---</option>
+                                                                        <option value="98">India</option>
+                                                                        <option value="222">United States of America</option>
+                                                                        <option value="195" selected="">Sri Lanka</option>
+                                                                        <option value="162">Pakistan</option>
+                                                                        <option value="220">United Arab Emirates</option>
+                                                                        <option value="129">Malaysia</option>
+                                                                        <option value="221">United Kingdom</option>
+                                                                        <option value="13">Australia</option>
+                                                                        <option value="185">Saudi Arabia</option>
+                                                                        <option value="39">Canada</option>
+                                                                        <option value="189">Singapore</option>
+                                                                        <option value="114">Kuwait</option>
+                                                                        <option value="">-------------------------</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">District</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control">
+                                                                        <option value="0">- Select - </option><option value="201">Ampara</option><option value="202">Anuradhapura</option><option value="203">Badulla</option><option value="204">Batticaloa</option><option value="205" selected="">Colombo</option><option value="206">Galle</option><option value="207">Gampaha</option><option value="208">Hambantota</option><option value="209">Jaffna</option><option value="210">Kalutara</option><option value="211">Kandy</option><option value="212">Kegalle</option><option value="213">Kilinochchi</option><option value="214">Kurunegala</option><option value="215">Mannar</option><option value="216">Matale</option><option value="217">Matara</option><option value="218">Monaragala</option><option value="219">Mullaitivu</option><option value="220">Nuwara Eliya</option><option value="221">Polonnaruwa</option><option value="222">Puttalam</option><option value="223">Ratnapura</option><option value="224">Trincomalee</option><option value="225">Vavuniya</option>	
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">Residing City</label>
+                                                                <div class="col-md-9">
+                                                                    <input id="msg" type="number" class="form-control" name="msg" placeholder="City">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group clearfix">
+                                                                <label class="col-md-3 control-label" for="notifymode">Citizenship</label>
+                                                                <div class="col-md-9">
+                                                                    <select id="gender" name="gender" class="form-control">
+                                                                        <option value="0">- Select - </option><option value="1" selected="">Citizen</option><option value="2">Permanent resident</option><option value="3">Work permit</option><option value="4">Student visa</option><option value="5">Temporary visa</option><option value="6">Non-Resident</option>		
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="span3">
+                                                                <input name="update" type="submit" value="Update" class="button2" ng-click="submitted = true">
+                                                            </div>
+
+                                                        </div>
+
                                                     </div>
-
                                                 </div>
-                                            </div>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-
-                            </div>
-                            <!-- form -->
-                        <?php } ?>
-
-                        <div class="well4">
-                            <div class="container">
-                                <h4><b>Browse Matrimoney profile by</b></h4>
-
-                                <div class="wel">
-                                    <div class="col-md-6">
-                                        <h5><b>Religion :</b></h5>
-                                        Hindu : <a href="">Hindu Brides</a> | <a href="">Hindu Grooms</a><br>
-                                        Muslim : <a href="">Muslim Brides</a> | <a href="">Muslim Grooms</a><br>
-                                        Christian : <a href="">Christian Brides</a> | <a href="">Christian Grooms</a><br>
-                                        Buddhist : <a href="">Buddhist Brides</a> | <a href="">Buddhist Grooms</a>
-
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <h5><b>Language :</b></h5>
-                                        Sinhala : <a href="">Sinhala Brides</a> | <a href="">Sinhala Grooms</a><br>
-                                        Tamil : <a href="">Tamil Brides</a> | <a href="">Tamil Grooms</a><br>
-                                        Malay : <a href="">Malay Brides</a> | <a href="">Malay Grooms</a><br>
-
-
-                                        <h5><b>Lives in:</b></h5>
-                                        <a href="">Sri Lanka</a> | <a href="">UAE</a>
-                                        <a href="">UK</a> | <a href="">Qatar</a>
-                                        <a href="">India</a> | <a href="">Saudi Arabia</a> | <a href="">Australia</a><br>
-
-
-                                    </div>
 
 
                                 </div>
+                                <!-- form -->
+                            <?php } ?>
 
+                            <div class="well4">
+                                <div class="container">
+                                    <h4><b>Browse Matrimoney profile by</b></h4>
+
+                                    <div class="wel">
+                                        <div class="col-md-6">
+                                            <h5><b>Religion :</b></h5>
+                                            Hindu : <a href="">Hindu Brides</a> | <a href="">Hindu Grooms</a><br>
+                                            Muslim : <a href="">Muslim Brides</a> | <a href="">Muslim Grooms</a><br>
+                                            Christian : <a href="">Christian Brides</a> | <a href="">Christian Grooms</a><br>
+                                            Buddhist : <a href="">Buddhist Brides</a> | <a href="">Buddhist Grooms</a>
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <h5><b>Language :</b></h5>
+                                            Sinhala : <a href="">Sinhala Brides</a> | <a href="">Sinhala Grooms</a><br>
+                                            Tamil : <a href="">Tamil Brides</a> | <a href="">Tamil Grooms</a><br>
+                                            Malay : <a href="">Malay Brides</a> | <a href="">Malay Grooms</a><br>
+
+
+                                            <h5><b>Lives in:</b></h5>
+                                            <a href="">Sri Lanka</a> | <a href="">UAE</a>
+                                            <a href="">UK</a> | <a href="">Qatar</a>
+                                            <a href="">India</a> | <a href="">Saudi Arabia</a> | <a href="">Australia</a><br>
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
                             </div>
+                        </div></div>
+
+
+                    <br>
+                    <style>
+                        .well9 {
+
+
+                        margin-bottom: 0px;
+                        background-color: #fff;
+                        color: #000;
+
+
+
+
+                    </style>
+                    <div class="well9">
+                        <div class="container"><br>
+                            <a href="">About Us</a> | <a href="">Contact Us</a>
+                            <a href="">Privacy Policy</a> | <a href="">Qatar</a>
+                            <a href="">Pay Now</a> | <a href="">Post Success Story</a> | <a href="">Terms and Conditions</a>
+                            | <a href="">Popular Matrimony Search</a> | <a href="">Events</a><br>
+
+
                         </div>
-                    </div></div>
 
 
-                <br>
-                <style>
-                    .well9 {
+                        <!--footer-->
 
+                        <footer class="footer">
 
-                    margin-bottom: 0px;
-                    background-color: #fff;
-                    color: #000;
+                            <ul class="social-icon animate pull-right">
+                                <div class="container">
 
 
 
-
-                </style>
-                <div class="well9">
-                    <div class="container"><br>
-                        <a href="">About Us</a> | <a href="">Contact Us</a>
-                        <a href="">Privacy Policy</a> | <a href="">Qatar</a>
-                        <a href="">Pay Now</a> | <a href="">Post Success Story</a> | <a href="">Terms and Conditions</a>
-                        | <a href="">Popular Matrimony Search</a> | <a href="">Events</a><br>
-
-
+                                    <font color="red"> <b>Follow Us : </b> </font>        <li><a href="#" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- change the link to social page and edit title-->
+                                    <li><a href="#" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
                     </div>
-
-
-                    <!--footer-->
-
-                    <footer class="footer">
-
-                        <ul class="social-icon animate pull-right">
-                            <div class="container">
-
-
-
-                                <font color="red"> <b>Follow Us : </b> </font>        <li><a href="#" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- change the link to social page and edit title-->
-                                <li><a href="#" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                        </ul>
-                </div>
-            </footer>
+                </footer>
 
 
 
 
-        </body>
-    </html>
+            </body>
+        </html>
