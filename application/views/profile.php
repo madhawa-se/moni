@@ -35,7 +35,9 @@
         <script>
             var baseurl = "<?php echo base_url(); ?>";
         </script>
-        <script src="<?php echo base_url() ?>js/app.js"></script>
+
+        <script src="<?php echo base_url() ?>js/app2.js"></script>
+        <script src="<?php echo base_url() ?>js/filereader.js"></script>
         <script>
 <?php
 if (isset($jsondata)) {
@@ -62,7 +64,7 @@ if (isset($jsondata)) {
 
             /*   bootstrap overide  */
             .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-                background-color: rgba(233, 30, 99, 0.54);
+                background-color: rgba(233, 30, 99, 0.73);
             }
             /* - bootstrap overide  */
         </style>
@@ -294,11 +296,11 @@ if (isset($jsondata)) {
                                                     <style>
                                                         .tab-pane h4,  .tab-pane .h4 {
                                                             font-size: 18px;
-                                                            border-top: 4px solid rgba(255, 152, 0, 0.48);
+                                                            border-top: 4px solid rgb(255, 162, 193);
                                                             padding: 10px;
                                                             color: black;
                                                             /* border-radius: 5px; */
-                                                            /* background-color: rgba(103, 58, 183, 0.34); */
+                                                            background-color: rgba(202, 197, 158, 0.26);
                                                         }
                                                         .tab-pane{
                                                             margin-bottom: 40px;
@@ -455,14 +457,15 @@ if (isset($jsondata)) {
                                                             </div>
 
 
-                                                            <div class="form-group">
+                                                            <div class="form-group" ng-controller="UploadController">
                                                                 <label class="col-md-5 control-label" >Profile Image</label>
                                                                 <div class="col-md-7">
-                                                                    <div class="profile-img">
-                                                                        <img class="img-responsive img-circle" style="max-width:100px" src="<?php echo base_url() ?>images/profile.png"/>
+                                                                    <div class="profile-img" >
+                                                                        <img ng-src="{{imageSrc}}" class="img-responsive img-circle" style="max-width:100px" />
                                                                         </div>
                                                                     </div>
-                                                                    <input type="file" value="upload"/>
+                                                                    <input type="file" value="upload" ng-file-select="onFileSelect($files)" ng-model="imageSrc"/>
+
                                                                 </div>
 
 
