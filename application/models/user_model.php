@@ -48,11 +48,12 @@ class user_model extends CI_Model {
         }
     }
 
-    function updateUser($data) {
+    function updateUser($uid,$data) {
         //return $this->db->insert('user', $data);
         //var_dump($data);
 
         $this->db->trans_start();
+        $this->db->where('id', $uid);
         $this->db->update('user', $data);
         $this->db->trans_complete();
         if (!$this->db->trans_status()) {

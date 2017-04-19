@@ -248,7 +248,7 @@ app.controller('formController', function ($scope, $http, $filter) {
     $scope.countryList = [];
     $scope.religionList = [];
     $scope.profileForList = [];
-    $scope.genders = [{id: "1", name: "male"}, {id: "2", name: "femail"}];
+    $scope.genders = [{id: "1", name: "Male"}, {id: "2", name: "Femail"}];
     $scope.submitForm = function ($event, $valid) {
         //alert(isValid);
         if (!$valid) {

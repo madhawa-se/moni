@@ -91,7 +91,7 @@
                             }
 
                         </style>
-                        <img class="img3" height="450px" src="<?php echo base_url() ?>images/map3.png" align="center">
+                        <img class="img3 img-responsive" style="max-height:450px !important" src="<?php echo base_url() ?>images/map3.png" align="center">
 
                     </div>	
 
@@ -136,7 +136,7 @@
                                         <label class="col-md-3 control-label" >Profile for</label>
                                         <div class="col-md-9">
                                             <select id="profile" name="profile" ng-model="profile" class="form-control" ng-options="c.id as c.name  for c in profileForList track by c.id" required>
-                                                <option value="">--select--</option>
+                                                <option value="">--Select--</option>
                                             </select>
                                             <p ng-show="regform.profile.$invalid && (!regform.profile.$pristine || submitted)" class="help-danger help">Profile for is required.</p>
 
@@ -149,7 +149,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textinput" align="left">Name</label>
                                         <div class="col-md-9">
-                                            <input id="name" ng-model="name" name="name" type="text" placeholder="Your name" class="form-control input-md" required="">
+                                            <input id="name" ng-model="name" name="name" type="text" placeholder="Your Name" class="form-control input-md" required="">
                                             <p ng-show="regform.name.$invalid && (!regform.name.$pristine || submitted)" class="help-danger help">You name is required.</p>
                                         </div>
 
@@ -161,7 +161,7 @@
                                         <label class="col-md-3 control-label" for="notifymode">Gender</label>
                                         <div class="col-md-9">
                                             <select id="gender" name="gender" class="form-control" ng-model="gender"  ng-options="c.id as c.name  for c in genders track by c.id" required >
-                                                <option value="">--select--</option>
+                                                <option value="">--Select--</option>
                                             </select>
                                             <p ng-show="regform.gender.$invalid && (!regform.gender.$pristine || submitted)" class="help-danger help">please select your gender</p>
 
@@ -220,7 +220,7 @@
                                         <label class="col-md-3 control-label" for="threshold">Religion</label>
                                         <div class="col-md-9">
                                             <select id="religion" name="religion"  ng-model="religion_list" class="form-control" ng-options="c.id as c.name  for c in religionList track by c.id" required>
-                                                <option value="">--select--</option>
+                                                <option value="">--Select--</option>
                                             </select>
                                             <p ng-show="regform.religion.$invalid && (regform.religion.$touched || submitted)" class="help-danger help">select your religion</p>
                                         </div>
@@ -232,7 +232,7 @@
                                         <label class="col-md-3 control-label" for="threshold">Mother Tongue</label>
                                         <div class="col-md-9">
                                             <select id="mothertongue" name="mothertongue" ng-model="lan_list" class="form-control" ng-options="c.id as c.name  for c in lanList track by c.id" required>
-                                                <option value="">--select--</option>
+                                                <option value="">--Select--</option>
                                             </select>
                                             <p ng-show="regform.mothertongue.$invalid && (regform.mothertongue.$touched || submitted)" class="help-danger help">select your language</p>
                                         </div>
@@ -243,7 +243,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="textinput">Email</label>
                                         <div class="col-md-9">
-                                            <input  name="email" ng-model="email" type="email" placeholder="Your email address" class="form-control input-md" required/>
+                                            <input  name="email" ng-model="email" type="email" placeholder="Your Email Address" class="form-control input-md" required/>
                                             <p ng-show="regform.email.$error.required && (!regform.email.$pristine || submitted)" class="help-danger help">You Email is required.</p>
                                             <p ng-show="(!regform.email.$error.required && regform.email.$invalid) && (!regform.email.$pristine || submitted)" class="help-danger help">Enter a valid email</p>
                                         </div>
@@ -257,7 +257,7 @@
                                             <select id="livein" name="livein" class="form-control" ng-model="country_list" ng-change="updateCountry(country_list)"
                                                     ng-options="c.id as c.name  for c in countryList track by c.id" required>
 
-                                                <option data-country_code="00" value="">--select--</option>
+                                                <option data-country_code="00" value="">--Select--</option>
 
                                                 <!-- <option ng-repeat="country in countryList" data-country_code="{{country.code}}" value="{{country.id}}">{{country.name}}</option>-->
 
@@ -419,7 +419,7 @@
                 <div class="form-group">
                     <label for="name">Religion</label><br>
                     <select id="religion" name="religion" class="form-control">
-                        <option value="">  &nbsp; &nbsp;&nbsp;&nbsp; --select-- &nbsp; &nbsp;&nbsp;&nbsp; </option>
+                        <option value="">  &nbsp; &nbsp;&nbsp;&nbsp; --Select-- &nbsp; &nbsp;&nbsp;&nbsp; </option>
                         <option value="1">Hindu</option>
                         <option value="2">Christian</option>
                         <option value="1">Muslim</option>
@@ -431,7 +431,7 @@
 
                     <label for="email">Mother Tongue</label><br>
                     <select id="mothertongue" name="mothertongue" class="form-control">
-                        <option value="">  &nbsp; &nbsp;&nbsp;&nbsp; --select-- &nbsp; &nbsp;&nbsp;&nbsp; </option>
+                        <option value="">  &nbsp; &nbsp;&nbsp;&nbsp; --Select-- &nbsp; &nbsp;&nbsp;&nbsp; </option>
                         <option value="1">Sinhala</option>
                         <option value="2">Tamil</option>
                         <option value="1">English</option>
@@ -442,7 +442,7 @@
 
                     <label for="pwd">Country Living In</label><br>
                     <select id="livein" name="livein" class="form-control">
-                        <option value="">  &nbsp; &nbsp;&nbsp;&nbsp; --select-- &nbsp; &nbsp;&nbsp;&nbsp; </option>
+                        <option value="">  &nbsp; &nbsp;&nbsp;&nbsp; --Select-- &nbsp; &nbsp;&nbsp;&nbsp; </option>
                         <option value="1">Srilanka</option>
                         <option value="2">India</option>
                         <option value="3">Colombo</option>

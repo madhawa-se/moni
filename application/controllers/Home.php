@@ -27,7 +27,8 @@ class Home extends My_Controller {
         $login_data = $this->session->userdata('loggedin');
         $uname = $login_data["username"];
         ///echo ("hello $uname ! welcome back");
-        //$this->load->view('home', $this->view_data);
+        $this->load->view('home', $this->view_data);
+        
         redirect('/profile');
     }
 

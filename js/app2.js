@@ -1,8 +1,35 @@
 var app = angular.module('myapp', []);
+app.directive("w3TestDirective", function() {
+    return {
+        template : "<h1>Made by a directive!</h1>"
+    };
+});
 
 app.controller('formController', function ($scope, $http, $filter) {
 
+///////////////////////////////////////////////////////////////////////////////////////
+    $scope.formModels = {
+        height: {
+            value: "", error: {state: false, msg: ""}
+        },
+        weight: {
+            value: "", error: {state: false, msg: ""}
+        }
+    };
+
+    $scope.handleError = function (errorObj) {
+        $.each(errorObj, function (key, value) {
+            var field=$scope.formModels[key];
+            var error=field.error;
+            error.state=true;
+            error.msg=value;
+        });
+    }
+
+
+///////////////////////////////////////////////////////////////////////////////////////
     $scope.x = 10;
+    $scope.title = "test";
     $scope.brideList = [];
     $scope.selectedLoc = "Colombo";
     $scope.brides = {
@@ -161,7 +188,7 @@ app.controller('formController', function ($scope, $http, $filter) {
                     }
                 ]
             },
-               {
+            {
                 "loc": "Galle",
                 "brides": [
                     {
@@ -308,37 +335,85 @@ app.controller('formController', function ($scope, $http, $filter) {
             alert(response.statusText);
         });
     };
+    $scope.selectData = function () {
+        if (typeof jsonData !== 'undefined') {
+            $scope.name = jsonData.name;
+            $scope.gender = {id: jsonData.gender + ""};
+            $scope.religion_list = {id: jsonData.religion + ""};
+            $scope.lan_list = {id: jsonData.lan + ""};
+            $scope.email = jsonData.email;
+            $scope.country_list = {id: jsonData.country + ""};
+            // $scope.fnumber=jsonData.;
 
+        }
+    };
+
+    $scope.updateProfile = function (field_id) {
+        submitted = true;
+        if (field_id === 2) {
+            // alert("basic");
+            console.log($("#about-me :input[value!='']").serialize());
+            console.log();
+
+            var formData = $("#about-me :input").filter(function (index, element) {
+                return $(element).val() != "";
+            }).serialize();
+
+            console.log(formData);
+            $scope.submitForms(formData);
+        }
+
+    };
+
+    $scope.getCountryList();
+    $scope.getReligionList();
+    $scope.getLanList();
+    $scope.getprofileForList();
+    $scope.selectData();
+    //$scope.showdetails("colombo");
+    $scope.submitForms = function (formData) {
+        $http({
+            method: 'POST',
+            data: formData,
+            url: baseurl + "profile/update_profile",
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).then(function successCallback(response) {
+            $scope.handleError(response.data);
+        }, function errorCallback(response) {
+            alert("error");
+        }
+        );
+    };
 
 });
 
-app.controller('UploadController', function($scope, fileReader) {
+app.controller('UploadController', function ($scope, fileReader) {
     $scope.imageSrc = "";
-    
-    $scope.$on("fileProgress", function(e, progress) {
-      $scope.progress = progress.loaded / progress.total;
+
+    $scope.$on("fileProgress", function (e, progress) {
+        $scope.progress = progress.loaded / progress.total;
     });
 });
 
-  app.directive("ngFileSelect", function(fileReader, $timeout) {
+app.directive("ngFileSelect", function (fileReader, $timeout) {
     return {
-      scope: {
-        ngModel: '='
-      },
-      link: function($scope, el) {
-        function getFile(file) {
-          fileReader.readAsDataUrl(file, $scope)
-            .then(function(result) {
-              $timeout(function() {
-                $scope.ngModel = result;
-              });
+        scope: {
+            ngModel: '='
+        },
+        link: function ($scope, el) {
+            function getFile(file) {
+                fileReader.readAsDataUrl(file, $scope)
+                        .then(function (result) {
+                            $timeout(function () {
+                                $scope.ngModel = result;
+                            });
+                        });
+            }
+
+            el.bind("change", function (e) {
+                var file = (e.srcElement || e.target).files[0];
+                getFile(file);
             });
         }
-
-        el.bind("change", function(e) {
-          var file = (e.srcElement || e.target).files[0];
-          getFile(file);
-        });
-      }
     };
-  });
+});
