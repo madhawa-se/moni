@@ -87,24 +87,29 @@
                         <style>
                             .img3{
                                 vertical-align: middle;
-                                margin-left: 200px;
+                            }
+                            /* Portrait tablets and small desktops */
+                            @media (min-width:992px) {
+                                .img3{
+                                   margin-left: 200px;
+                                }
                             }
 
                         </style>
-                        <img class="img3 img-responsive" style="max-height:450px !important" src="<?php echo base_url() ?>images/map3.png" align="center">
+                        <img class="img3 img-responsive" style="max-height:450px !important" src="<?php echo base_url() ?>images/map4.png" align="center">
 
-                    </div>	
+                        </div>	
 
-                    <!--content para end-->		
-
-
-
-                    <!--content form start -->	
-                    <br>
+                        <!--content para end-->		
 
 
-                    <style>
-                        .well8 {
+
+                        <!--content form start -->	
+                        <br>
+
+
+                        <style>
+                            .well8 {
                             min-height: 20px;
                             padding: 19px;
                             margin-bottom: 20px;
@@ -128,7 +133,7 @@
 
                                 <form ng-cloak ng-validate="true" action="<?php echo site_url('home/register'); ?>" novalidate="true"  class="form-horizontal" method="post" name="regform" ng-controller="formController" ng-submit="submitForm($event, regform.$valid)">
 
-                                    <?php echo validation_errors()?>
+                                    <?php echo validation_errors() ?>
 
                                     <legend><font color="#de3075" size="6px" >Register Free</font></legend>
 

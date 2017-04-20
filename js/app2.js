@@ -1,8 +1,21 @@
 var app = angular.module('myapp', []);
-app.directive("w3TestDirective", function() {
+app.directive("xinput", function () {
     return {
-        template : "<h1>Made by a directive!</h1>"
+        restrict: "E",
+        scope: {
+            name: "=name"
+        },
+        template: "<input ng-model=name name='{{name}}' >"
     };
+});
+app.directive("myWidgetBi", function() {
+  return {
+    restrict: "E",
+    template: "<p>{{text}}</p>",
+    scope: {
+      text: "@text"
+    }
+  };
 });
 
 app.controller('formController', function ($scope, $http, $filter) {
@@ -19,10 +32,10 @@ app.controller('formController', function ($scope, $http, $filter) {
 
     $scope.handleError = function (errorObj) {
         $.each(errorObj, function (key, value) {
-            var field=$scope.formModels[key];
-            var error=field.error;
-            error.state=true;
-            error.msg=value;
+            var field = $scope.formModels[key];
+            var error = field.error;
+            error.state = true;
+            error.msg = value;
         });
     }
 

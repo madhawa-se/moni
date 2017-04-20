@@ -360,8 +360,8 @@ if (isset($jsondata)) {
                                                             <div class="form-group">
                                                                 <label class="col-md-3 control-label" for="textinput" align="left">Name</label>
                                                                 <div class="col-md-9">
-                                                                    <input id="name" ng-model="name" name="name" type="text" placeholder="your name" class="form-control input-md" required="">
-                                                                    <p ng-show="regform.name.$invalid && (!regform.name.$pristine || submitted)" class="help-danger help">You name is required.</p>
+                                                                
+                                                                      <xinput name="test"></xinput>
                                                                 </div>
 
                                                             </div>
